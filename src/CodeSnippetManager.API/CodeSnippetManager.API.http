@@ -1,0 +1,6 @@
+@CodeSnippetManager.API_HostAddress = http://localhost:5134
+
+GET {{CodeSnippetManager.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
