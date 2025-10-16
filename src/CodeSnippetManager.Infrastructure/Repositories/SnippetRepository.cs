@@ -47,7 +47,7 @@ namespace CodeSnippetManager.Infrastructure.Repositories
 
         public async Task<IEnumerable<Snippet>> SearchAsync(string query)
         {
-            return await _context.Snippets.Include(s => s.SnippetTags).ThenInclude(st => st.Tag).Where(s => s.Title.Contains(query) ||s.Code.Contains(query) ||s.Description.Contains(query)).ToListAsync();
+            return await _context.Snippets.Include(s => s.SnippetTags).ThenInclude(st => st.Tag).Where(s => s.Title.Contains(query) || s.Code.Contains(query) || (s.Description != null && s.Description.Contains(query))).ToListAsync();
         }
 
         public async Task UpdateAsync(Snippet snippet)

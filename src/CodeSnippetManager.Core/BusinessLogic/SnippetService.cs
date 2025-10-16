@@ -60,7 +60,7 @@ namespace CodeSnippetManager.Core.BusinessLogic
             return snippets.Select(MapToDTO);
         }
 
-        public async Task<GetSnippetDTO> UpdateSnippetAsync(int id, CreateUpdateSnippetDTO dto)
+        public async Task<GetSnippetDTO?> UpdateSnippetAsync(int id, CreateUpdateSnippetDTO dto)
         {
             var snippet = await _snippetRepository.GetByIdAsync(id);
             if (snippet == null) return null;
