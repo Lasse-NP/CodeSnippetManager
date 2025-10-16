@@ -10,6 +10,6 @@ namespace CodeSnippetManager.Core.ModelLayer
     {
         public int? Id { get; set; }
         public required string Name { get; set; }
-        public required ICollection<SnippetTag> Snippets { get; set; } = new List<SnippetTag>();
+        public ICollection<SnippetTag> SnippetTags { get; set; } = new List<SnippetTag>();
     }
 }

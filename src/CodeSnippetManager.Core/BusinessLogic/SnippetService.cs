@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSnippetManager.Core.DTO;
+using CodeSnippetManager.Core.Interfaces;
 using CodeSnippetManager.Core.ModelLayer;
 
 namespace CodeSnippetManager.Core.BusinessLogic
