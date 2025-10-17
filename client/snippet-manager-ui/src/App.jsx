@@ -19,7 +19,7 @@ function App() {
                 <div className="sidebar">
                     <SearchBar
                         searchQuery={searchQuery}
-                        onSearchChange={setSearchQuery}
+                        setSearchQuery={setSearchQuery}
                     />
                     <SnippetList
                         selectedSnippetId={selectedSnippetId}

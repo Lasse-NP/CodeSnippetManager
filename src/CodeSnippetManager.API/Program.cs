@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173", "http://localhost:3000") // Vite default port
+            policy.WithOrigins("http://localhost:7034") // Vite default port
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -45,12 +45,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors("AllowReactApp");
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

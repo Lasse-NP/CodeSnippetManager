@@ -1,15 +1,47 @@
 import React, { useState, useEffect } from 'react';
+import { snippetsAPI } from '../api';
 import './SnippetDetail.css';
 
 function SnippetDetail({ selectedSnippetId }) {
     const [snippet, setSnippet] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (selectedSnippetId) {
-            // Fetch snippet details from backend or local storage
-            setSnippet(null); // Placeholder for fetch logic
+            const fetchSnippetDetails = async () => {
+                try {
+                    setLoading(true);
+                    setError(null);
+                    const data = await snippetsAPI.getSnippetById(selectedSnippetId);
+                    setSnippet(data);
+                } catch (err) {
+                    setError('Failed to load snippet details.');
+                    console.error('Error fetching snippet details:', err);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchSnippetDetails();
         }
     }, [selectedSnippetId]);
+
+    if (loading) {
+        return (
+            <div className="snippet-detail empty">
+                <p>Loading...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="snippet-detail empty">
+                <p className="error">{error}</p>
+            </div>
+        );
+    }
 
     if (!selectedSnippetId) {
         return (
