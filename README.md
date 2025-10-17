@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Lasse-NP/CodeSnippetManager">
-    <svg src="src/assets/react.svg" alt="Logo" width="80" height="80" />
+    <img src="images/ReactLogo.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">A Personal Code Snippet Manager</h3>
   <p align="center">
