@@ -1,0 +1,12 @@
+/* NavigationBar.css */
+.navigation-bar {
+    background-color: #c0392b;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+    .navigation-bar h1 {
+        font-size: 2rem;
+        margin: 0;
+    }
