@@ -72,6 +72,7 @@ function SnippetDetail({ selectedSnippetId }) {
             <div className="snippet-header">
                 <h2>{snippet.title}</h2>
                 <h3>{snippet.language}</h3>
+                <h4>{snippet.description}</h4>
             </div>
             <div className="snippet-code">
                 <pre>

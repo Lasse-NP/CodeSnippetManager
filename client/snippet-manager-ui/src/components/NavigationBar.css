@@ -1,12 +1,50 @@
 /* NavigationBar.css */
 .navigation-bar {
-    background-color: #c0392b;
+    background-color: #251515;
+    background: linear-gradient(to bottom, #150505 1%, #251515);
     color: white;
     padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
-    .navigation-bar h1 {
-        font-size: 2rem;
-        margin: 0;
+.button-group {
+    margin-left: 120px;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation-bar button {
+    font-size: 1.8rem;
+    font-weight: 400;
+    background-color: rgba(255,255,255,0.1);
+    max-width: fit-content;
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 3px solid transparent;
+    transition: box-shadow 0.5s ease;
+}
+
+.navigation-bar button:hover {
+    box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+}
+
+    .navigation-bar button:focus {
+        outline: none;
+        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
     }
+
+    .navigation-bar button:active {
+        outline: none;
+        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+    }
+
+
+.navigation-bar img {
+    width: 75px;
+    height: auto;
+    position: absolute;
+    left: 30px;
+    opacity: 75%;
+}

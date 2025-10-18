@@ -17,28 +17,42 @@
     }
 
 .snippet-header {
-    background-color: #3498db;
+    background-color: #472C2D;
     color: white;
     padding: 30px;
     text-align: center;
 }
 
     .snippet-header h2 {
+        text-align: center;
+        padding: 10px;
         font-size: 2rem;
+        font-weight: 400;
     }
 
     .snippet-header h3 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .snippet-header h4 {
+        font-size: 1.2rem;
+        font-weight: 400;
         margin-bottom: 20px;
         text-align: center;
     }
 
 .snippet-code {
     flex: 1;
-    background-color: #9b59b6;
+    background: linear-gradient(to right, #402828, #3D2622);
     color: white;
     padding: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
     overflow-y: auto;
+    border-radius: 20px;
 }
 
     .snippet-code pre {
@@ -50,12 +64,12 @@
 
     .snippet-code code {
         font-family: 'Courier New', monospace;
-        font-size: 0.95rem;
+        font-size: 1rem;
         line-height: 1.5;
     }
 
 .snippet-actions {
-    background-color: #f1c40f;
+    background-color: #472C2D;
     padding: 30px;
     display: flex;
     gap: 20px;
@@ -64,8 +78,8 @@
 
     .snippet-actions button {
         padding: 15px 40px;
-        font-size: 1.1rem;
-        font-weight: bold;
+        font-size: 1.4rem;
+        font-weight: 400;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -78,11 +92,11 @@
         }
 
 .btn-update {
-    background-color: #3498db;
+    background-color: #613C3F;
     color: white;
 }
 
 .btn-delete {
-    background-color: #e74c3c;
+    background-color: #613C3F;
     color: white;
 }
