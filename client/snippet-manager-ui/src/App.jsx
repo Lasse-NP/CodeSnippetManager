@@ -17,20 +17,21 @@ function App() {
     const [currentView, setCurrentView] = useState('start');
     // Cache snippets fetched from StartPage
     const [cachedSnippets, setCachedSnippets] = useState(null);
+    // State to track when to refresh
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     const handleCreateSnippet = (newSnippet) => {
-        // After creating, switch back to view mode and select the new snippet
         setCurrentView('view');
         setSelectedSnippetId(newSnippet.id);
-        // Clear cache so list refreshes
         setCachedSnippets(null);
+        setRefreshTrigger(prev => prev + 1);
     };
 
     const handleUpdateSnippet = () => {
-        // After updating, switch back to view mode
         setCurrentView('view');
-        // Clear cache so list refreshes
+        setSelectedSnippetId(selectedSnippetId.id);
         setCachedSnippets(null);
+        setRefreshTrigger(prev => prev + 1);
     };
 
     const handleCancelCreate = () => {
@@ -43,6 +44,13 @@ function App() {
 
     const handleStartUpdate = () => {
         setCurrentView('update');
+    };
+
+    const handleStartDelete = () => {
+        setCurrentView('view');
+        setSelectedSnippetId(null);
+        setCachedSnippets(null);
+        setRefreshTrigger(prev => prev + 1);
     };
 
     const handleNavigateToView = (snippetId) => {
@@ -90,6 +98,7 @@ function App() {
                         setSelectedSnippetId={setSelectedSnippetId}
                         searchQuery={searchQuery}
                         cachedSnippets={cachedSnippets}
+                        refreshTrigger={refreshTrigger}
                     />
                 </div>
                 {currentView === 'view' ? (
@@ -97,6 +106,7 @@ function App() {
                         <SnippetDetail
                             selectedSnippetId={selectedSnippetId}
                             onStartUpdate={handleStartUpdate}
+                            onStartDelete={handleStartDelete}
                         />
                     </div>
                 ) : currentView === 'create' ? (

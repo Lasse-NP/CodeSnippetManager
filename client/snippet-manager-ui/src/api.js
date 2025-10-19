@@ -81,7 +81,7 @@ export const snippetsAPI = {
         if (!response.ok) {
             throw new Error(`Failed to delete snippet ${id}`);
         }
-        return response.json();
+        return response.status === 204;
     },
 
     // Search snippets by query

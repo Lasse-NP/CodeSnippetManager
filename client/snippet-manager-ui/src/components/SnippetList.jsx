@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetList.css';
 
-function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cachedSnippets }) {
+function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cachedSnippets, refreshTrigger }) {
     const [snippets, setSnippets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,7 +10,7 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
 
     useEffect(() => {
         // If we have cached snippets, use them immediately
-        if (cachedSnippets) {
+        if (cachedSnippets && refreshTrigger === 0) {
             console.log('Using cached snippets');
             setSnippets(cachedSnippets);
             setLoading(false);
@@ -42,7 +42,7 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
         };
 
         fetchSnippets();
-    }, [retryCount, cachedSnippets]);
+    }, [retryCount, cachedSnippets, refreshTrigger]);
 
     const filteredSnippets = snippets.filter(snippet => {
         const titleMatch = snippet.title?.toLowerCase().includes(searchQuery.toLowerCase());

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetDetail.css';
 
-function SnippetDetail({ selectedSnippetId, onStartUpdate }) {
+function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     const [snippet, setSnippet] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -69,9 +69,9 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate }) {
         if (window.confirm('Are you sure you want to delete this snippet?')) {
             try {
                 await snippetsAPI.deleteSnippet(selectedSnippetId);
-                alert('Snippet deleted successfully.');
-                // Trigger refresh
-                window.location.reload();
+                if (onStartDelete) {
+                    onStartDelete();
+                }
             } catch (err) {
                 alert('Failed to delete snippet.');
                 console.error('Error deleting snippet:', err);
