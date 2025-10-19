@@ -23,11 +23,11 @@ The layout of the main page is as shown below, with a top navigation bar, a list
 - [x] Build Restful API
 - [x] Design Main Page
 - [ ] Implement Full CRUD Functionality
-    - [ ] Create Snippets
+    - [x] Create Snippets
     - [x] Read Snippets
     - [ ] Update Snippets
     - [ ] Delete Snippets
 - [ ] Design Start Page
-- [ ] Finalize and Polish Design
+- [x] Finalize and Polish Design
 - [ ] Enhance Visuals of Code
 - [ ] Switch to Permanent Database Solution
