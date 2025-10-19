@@ -15,7 +15,7 @@ In this project, I have set out to built a Code Snippet Manager, backed by an MS
 
 The layout of the main page is as shown below, with a top navigation bar, a list of available snippets on the left bar, a search bar atop the left bar, and lastly a detailed view of the clicked snippet on the big right space.
 
-<img width="1546" height="806" alt="image" src="https://github.com/user-attachments/assets/67b003b8-694d-4674-bcd2-d94c7d514102" />
+<img width="1513" height="970" alt="image" src="https://github.com/user-attachments/assets/4910a204-fcc3-4fd4-972f-1a018b9a6499" />
 
 ## Roadmap
 
