@@ -41,10 +41,18 @@
     }
 
 
-.navigation-bar img {
-    width: 75px;
+.navigation-bar svg {
+    fill: white;
+    width: 80px;
     height: auto;
     position: absolute;
-    left: 30px;
+    left: 32px;
+    top: 15px;
     opacity: 75%;
+    cursor: pointer;
+    transition: filter 0.5s ease;
 }
+
+    .navigation-bar svg:hover {
+        filter: drop-shadow(1px 1px 10px #66493C) drop-shadow(-1px -1px 20px #82455B);
+    }

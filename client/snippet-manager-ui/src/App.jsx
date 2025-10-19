@@ -6,6 +6,7 @@ import SnippetList from './components/SnippetList';
 import SnippetDetail from './components/SnippetDetail';
 import SnippetCreate from './components/SnippetCreate';
 import SnippetUpdate from './components/SnippetUpdate';
+import StartPage from './components/StartPage';
 
 function App() {
     // State to track which snippet is selected
@@ -13,19 +14,23 @@ function App() {
     // State for search query
     const [searchQuery, setSearchQuery] = useState('');
     // State to track current view
-    const [currentView, setCurrentView] = useState('view');
+    const [currentView, setCurrentView] = useState('start');
+    // Cache snippets fetched from StartPage
+    const [cachedSnippets, setCachedSnippets] = useState(null);
 
     const handleCreateSnippet = (newSnippet) => {
         // After creating, switch back to view mode and select the new snippet
         setCurrentView('view');
         setSelectedSnippetId(newSnippet.id);
-        // You might want to refresh the snippet list here
+        // Clear cache so list refreshes
+        setCachedSnippets(null);
     };
 
     const handleUpdateSnippet = () => {
         // After updating, switch back to view mode
         setCurrentView('view');
-        // The snippet detail will automatically refresh because selectedSnippetId hasn't changed
+        // Clear cache so list refreshes
+        setCachedSnippets(null);
     };
 
     const handleCancelCreate = () => {
@@ -39,6 +44,32 @@ function App() {
     const handleStartUpdate = () => {
         setCurrentView('update');
     };
+
+    const handleNavigateToView = (snippetId) => {
+        setCurrentView('view');
+        if (snippetId) {
+            setSelectedSnippetId(snippetId);
+        }
+    };
+
+    const handleSnippetsFetched = (snippets) => {
+        // Cache the snippets for immediate display in SnippetList
+        setCachedSnippets(snippets);
+    };
+
+    // Render StartPage
+    if (currentView === 'start') {
+        return (
+            <div className="App">
+                <div className="start-view">
+                    <StartPage
+                        onNavigateToView={handleNavigateToView}
+                        onSnippetsFetched={handleSnippetsFetched}
+                    />
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="App">
@@ -58,6 +89,7 @@ function App() {
                         selectedSnippetId={selectedSnippetId}
                         setSelectedSnippetId={setSelectedSnippetId}
                         searchQuery={searchQuery}
+                        cachedSnippets={cachedSnippets}
                     />
                 </div>
                 {currentView === 'view' ? (

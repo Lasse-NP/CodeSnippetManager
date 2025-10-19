@@ -37,7 +37,7 @@ namespace CodeSnippetManager.Infrastructure.Repositories
 
         public async Task<IEnumerable<Snippet>> GetAllAsync()
         {
-            return await _context.Snippets.Include(s => s.SnippetTags).ThenInclude(st => st.Tag).OrderByDescending(s => s.CreatedAt).ToListAsync();
+            return await _context.Snippets.Include(s => s.SnippetTags).ThenInclude(st => st.Tag).OrderByDescending(s => s.UpdatedAt > s.CreatedAt ? s.UpdatedAt : s.CreatedAt).ToListAsync();
         }
 
         public async Task<Snippet?> GetByIdAsync(int id)

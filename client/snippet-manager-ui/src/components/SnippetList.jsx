@@ -2,23 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetList.css';
 
-function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery }) {
+function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cachedSnippets }) {
     const [snippets, setSnippets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [retryCount, setRetryCount] = useState(0);
 
     useEffect(() => {
+        // If we have cached snippets, use them immediately
+        if (cachedSnippets) {
+            console.log('Using cached snippets');
+            setSnippets(cachedSnippets);
+            setLoading(false);
+            return;
+        }
+
         const fetchSnippets = async () => {
             try {
                 setLoading(true);
                 setError(null);
+                console.log('Attempting to fetch from API...');
                 const data = await snippetsAPI.getAllSnippets();
+                console.log('Successfully fetched snippets:', data);
+                console.log('First snippet structure:', data[0]); // See the actual structure
                 setSnippets(data);
                 setRetryCount(0);
             } catch (err) {
-                setError('Failed to load snippets. Retrying...');
-                console.error('Error fetching snippets:', err);
+                console.error('Full error details:', err);
+                console.error('Error message:', err.message);
+                setError(`Failed to load snippets: ${err.message}`);
                 // Retry logic with exponential backoff
                 const retryDelay = Math.min(Math.pow(2, retryCount) * 1000, 30000); // Max 30 seconds
                 setTimeout(() => {
@@ -30,7 +42,7 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery }) {
         };
 
         fetchSnippets();
-    }, [retryCount]);
+    }, [retryCount, cachedSnippets]);
 
     const filteredSnippets = snippets.filter(snippet => {
         const titleMatch = snippet.title?.toLowerCase().includes(searchQuery.toLowerCase());
@@ -49,7 +61,7 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery }) {
         return (
             <div className="snippet-list">
                 <h2>List of Snippets</h2>
-                <p>Loading...</p>
+                <p>Loading... {retryCount > 0 && `(Retry attempt ${retryCount})`}</p>
             </div>
         );
     }
@@ -59,6 +71,7 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery }) {
             <div className="snippet-list">
                 <h2>List of Snippets</h2>
                 <p className="error">{error}</p>
+                <p className="retry-info">Retry attempt {retryCount}...</p>
             </div>
         );
     }
@@ -67,7 +80,8 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery }) {
         <div className="snippet-list">
             <h2>List of Snippets</h2>
             <div className="snippets-container">
-                {filteredSnippets.length === 0 ? (<p>No snippets found</p>) : (
+                {filteredSnippets.length === 0 ? (<p>No snippets found</p>
+                    ) : (
                     filteredSnippets.map(snippet => (
                         <div key={snippet.id} className={`snippet-item ${selectedSnippetId === snippet.id ? 'selected' : ''}`} onClick={() => setSelectedSnippetId(snippet.id)}>
                             <h3>{snippet.title}</h3>

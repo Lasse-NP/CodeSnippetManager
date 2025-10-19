@@ -1,0 +1,135 @@
+.start-page {
+    margin: 40px;
+    min-height: 100vh;
+}
+
+    .start-page div {
+        margin: 20px;
+    }
+
+    .start-page h1 {
+        margin: 20px;
+        font-size: 5rem;
+        font-weight: 600;
+    }
+
+.start-header {
+
+}
+
+    .start-header p {
+        margin: 20px;
+        font-size: 2rem;
+        font-weight: 400;
+    }
+
+.start-actions button {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: rgba(255,255,255,0.1);
+    max-width: fit-content;
+    padding: 15px 30px;
+    border-radius: 100px;
+    border: 3px solid transparent;
+    transition: box-shadow 0.5s ease;
+}
+
+    .start-actions button:hover {
+        box-shadow: -1px -1px 0 2px #8F6554, 1px 1px 0 2px #A35675;
+    }
+
+    .start-actions button:focus {
+        outline: none;
+        box-shadow: -1px -1px 0 2px #8F6554, 1px 1px 0 2px #A35675;
+    }
+
+    .start-actions button:active {
+        outline: none;
+        box-shadow: -1px -1px 0 2px #8F6554, 1px 1px 0 2px #A35675;
+    }
+
+
+.recent-snippets {
+}
+
+.recent-snippets h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.loading-message,
+.no-snippets {
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.snippet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.snippet-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .snippet-card:hover {
+        transform: translateY(-5px);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .snippet-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+.snippet-language {
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.snippet-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+    .snippet-tags .tag {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.72rem;
+    }
+
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    width: 20%;
+    display: inline-block;
+    padding: 30px 50px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+    .stat-card h3 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .stat-card p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
