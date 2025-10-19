@@ -27,7 +27,7 @@ The layout of the main page is as shown below, with a top navigation bar, a list
     - [x] Read Snippets
     - [x] Update Snippets
     - [x] Delete Snippets
-- [ ] Design Start Page
+- [x] Design Start Page
 - [x] Finalize and Polish Design
 - [ ] Enhance Visuals of Code
 - [ ] Switch to Permanent Database Solution
