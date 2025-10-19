@@ -22,11 +22,11 @@ The layout of the main page is as shown below, with a top navigation bar, a list
 - [x] Build Back-end
 - [x] Build Restful API
 - [x] Design Main Page
-- [ ] Implement Full CRUD Functionality
+- [x] Implement Full CRUD Functionality
     - [x] Create Snippets
     - [x] Read Snippets
-    - [ ] Update Snippets
-    - [ ] Delete Snippets
+    - [x] Update Snippets
+    - [x] Delete Snippets
 - [ ] Design Start Page
 - [x] Finalize and Polish Design
 - [ ] Enhance Visuals of Code
