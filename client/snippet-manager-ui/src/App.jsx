@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import SnippetList from './components/SnippetList';
 import SnippetDetail from './components/SnippetDetail';
 import SnippetCreate from './components/SnippetCreate';
+import SnippetUpdate from './components/SnippetUpdate';
 
 function App() {
     // State to track which snippet is selected
@@ -21,8 +22,22 @@ function App() {
         // You might want to refresh the snippet list here
     };
 
+    const handleUpdateSnippet = () => {
+        // After updating, switch back to view mode
+        setCurrentView('view');
+        // The snippet detail will automatically refresh because selectedSnippetId hasn't changed
+    };
+
     const handleCancelCreate = () => {
         setCurrentView('view');
+    };
+
+    const handleCancelUpdate = () => {
+        setCurrentView('view');
+    };
+
+    const handleStartUpdate = () => {
+        setCurrentView('update');
     };
 
     return (
@@ -32,48 +47,43 @@ function App() {
                 setCurrentView={setCurrentView}
             />
 
-            {currentView === 'view' ? (
-                <div className="main-layout">
-                    <div className="sidebar">
-                        <SearchBar
-                            searchQuery={searchQuery}
-                            setSearchQuery={setSearchQuery}
-                        />
-                        <SnippetList
-                            selectedSnippetId={selectedSnippetId}
-                            setSelectedSnippetId={setSelectedSnippetId}
-                            searchQuery={searchQuery}
-                        />
-                    </div>
 
-                    <div className="detail-view">
-                        <SnippetDetail selectedSnippetId={selectedSnippetId} />
-                    </div>
+            <div className="main-layout">
+                <div className="sidebar">
+                    <SearchBar
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
+                    />
+                    <SnippetList
+                        selectedSnippetId={selectedSnippetId}
+                        setSelectedSnippetId={setSelectedSnippetId}
+                        searchQuery={searchQuery}
+                    />
                 </div>
-            ) : (
-                <div className="main-layout">
-                        <div className="sidebar createView">
-                            <div className="sidebar">
-                                <SearchBar
-                                    searchQuery={searchQuery}
-                                    setSearchQuery={setSearchQuery}
-                                />
-                                <SnippetList
-                                    selectedSnippetId={selectedSnippetId}
-                                    setSelectedSnippetId={setSelectedSnippetId}
-                                    searchQuery={searchQuery}
-                                />
-                            </div>
+                {currentView === 'view' ? (
+                    <div className="detail-view">
+                        <SnippetDetail
+                            selectedSnippetId={selectedSnippetId}
+                            onStartUpdate={handleStartUpdate}
+                        />
                     </div>
+                ) : currentView === 'create' ? (
                     <div className="create-view">
                         <SnippetCreate
                             onCreate={handleCreateSnippet}
                             onCancel={handleCancelCreate}
-                            />
-                        </div>
-                </div>
-            )}
-
+                        />
+                    </div>
+                ) : (
+                    <div className="update-view">
+                        <SnippetUpdate
+                            selectedSnippetId={selectedSnippetId}
+                            onUpdate={handleUpdateSnippet}
+                            onCancel={handleCancelUpdate}
+                        />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

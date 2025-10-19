@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetDetail.css';
 
-function SnippetDetail({ selectedSnippetId }) {
+function SnippetDetail({ selectedSnippetId, onStartUpdate }) {
     const [snippet, setSnippet] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -46,7 +46,7 @@ function SnippetDetail({ selectedSnippetId }) {
     if (!selectedSnippetId) {
         return (
             <div className="snippet-detail no-selection">
-                <p>No snippet selected.</p>
+                <p>No Snippet Selected</p>
             </div>
         );
     }
@@ -54,17 +54,29 @@ function SnippetDetail({ selectedSnippetId }) {
     if (!snippet) {
         return (
             <div className="snippet-detail loading">
-                <p>Loading snippet details...</p>
+                <p>Loading Snippet Details...</p>
             </div>
         );
     }
 
     const handleUpdate = () => {
-        // Handle snippet update logic
+        if (onStartUpdate) {
+            onStartUpdate();
+        }
     };
 
-    const handleDelete = () => {
-        // Handle snippet delete logic
+    const handleDelete = async () => {
+        if (window.confirm('Are you sure you want to delete this snippet?')) {
+            try {
+                await snippetsAPI.deleteSnippet(selectedSnippetId);
+                alert('Snippet deleted successfully.');
+                // Trigger refresh
+                window.location.reload();
+            } catch (err) {
+                alert('Failed to delete snippet.');
+                console.error('Error deleting snippet:', err);
+            }
+        }
     };
 
     return (
@@ -80,9 +92,13 @@ function SnippetDetail({ selectedSnippetId }) {
                 </pre>
             </div>
 
-            <div className="snippet-actions">
-                <button className="btn-update" onClick={handleUpdate}>Update</button>
-                <button className="btn-delete" onClick={handleDelete}>Delete</button>
+            <div className="detail-actions">
+                <button className="btn-update" onClick={handleUpdate}>
+                    Update
+                </button>
+                <button className="btn-delete" onClick={handleDelete}>
+                    Delete
+                </button>
             </div>
         </div>
     );

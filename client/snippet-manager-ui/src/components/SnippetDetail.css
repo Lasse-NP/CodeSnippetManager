@@ -68,7 +68,7 @@
         line-height: 1.5;
     }
 
-.snippet-actions {
+.detail-actions {
     background-color: #472C2D;
     padding: 30px;
     display: flex;
@@ -76,7 +76,7 @@
     justify-content: center;
 }
 
-    .snippet-actions button {
+    .detail-actions button {
         padding: 15px 40px;
         font-size: 1.4rem;
         font-weight: 400;
@@ -86,7 +86,7 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-        .snippet-actions button:hover {
+        .detail-actions button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }

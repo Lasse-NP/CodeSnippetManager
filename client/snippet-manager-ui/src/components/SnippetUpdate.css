@@ -1,0 +1,95 @@
+.snippet-update {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+    .snippet-update label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .snippet-update h2 {
+        text-align: center;
+        margin-top: 15px;
+        padding: 10px;
+        font-size: 2rem;
+        font-weight: 400;
+    }
+
+    .snippet-update input {
+        font-size: 1.5rem;
+        background-color: #34201d;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: solid 3px transparent;
+        border-image: linear-gradient(to right, #66493C, #633A3F);
+        border-image-slice: 1;
+    }
+
+    .snippet-update textarea {
+        font-size: 1.2rem;
+        background-color: #34201d;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: solid 3px transparent;
+        border-image: linear-gradient(to right, #66493C, #633A3F);
+        border-image-slice: 1;
+    }
+
+.attributes {
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.main-body {
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.tags {
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.button-update-group {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+    gap: 20px; /* Space between buttons */
+}
+
+    .button-update-group button {
+        padding: 15px 40px;
+        font-size: 1.4rem;
+        font-weight: 400;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .button-update-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+.btn-update {
+    background-color: #613C3F;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #613C3F;
+    color: white;
+}
