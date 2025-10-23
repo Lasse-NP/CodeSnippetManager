@@ -107,7 +107,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     if (!snippet) {
         return (
             <div className="snippet-detail loading">
-                <p>Loading Snippet Details...</p>
+                <p id="detail-loading">Loading Snippet Details...</p>
             </div>
         );
     }
@@ -132,14 +132,23 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
         }
     };
 
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(snippet.code);
+            console.log('Copied to clipboard!');
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
+
     return (
         <div className="snippet-detail">
             <div className="snippet-header">
+                <div className="language-badge">{snippet.language}</div>
                 <h2>{snippet.title}</h2>
-                <h3>{snippet.language}</h3>
                 <h4>{snippet.description}</h4>
                 <div className="detail-tags">
-                    {snippet.tags.slice(0, 3).map((tag, idx) => (
+                    {snippet.tags.slice(0, snippet.tags.length).map((tag, idx) => (
                         <span key={idx} className="tag">
                             {typeof tag === 'string' ? tag : tag.name}
                         </span>
@@ -151,6 +160,9 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
                     <code ref={codeRef} className={`language-${snippet?.language.toLowerCase() || 'javascript'}`}>
                         {snippet.code}
                     </code>
+                    <svg id="copy-button" fill="#000000" width="50px" height="50px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" onClick={copyToClipboard}>
+                        <path fill="white" d="M0 1919.887h1467.88V452.008H0v1467.88ZM1354.965 564.922v1242.051H112.914V564.922h1242.051ZM1920 0v1467.992h-338.741v-113.027h225.827V112.914H565.035V338.74H452.008V0H1920ZM338.741 1016.93h790.397V904.016H338.74v112.914Zm0 451.062h790.397v-113.027H338.74v113.027Zm0-225.588h564.57v-112.913H338.74v112.913Z" fill-rule="evenodd" />
+                    </svg>
                 </pre>
             </div>
 

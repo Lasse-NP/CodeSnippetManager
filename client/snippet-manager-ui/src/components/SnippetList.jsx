@@ -78,7 +78,6 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
 
     return (
         <div className="snippet-list">
-            <h2>List of Snippets</h2>
             <div className="snippets-container">
                 {filteredSnippets.length === 0 ? (<p>No snippets found</p>
                     ) : (

@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    background: linear-gradient(135deg, #5a3840, #472C2D, #3d2328);
 }
 
     .snippet-detail.no-selection {
@@ -17,32 +18,38 @@
     }
 
 .snippet-header {
-    background-color: #472C2D;
     color: white;
-    padding: 30px;
+    padding: 10px;
+    margin-bottom: 15px;
     text-align: center;
 }
 
-    .snippet-header h2 {
-        text-align: center;
-        padding: 10px;
-        font-size: 2rem;
-        font-weight: 400;
-    }
+.language-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #66493C, #633A3F);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
 
-    .snippet-header h3 {
-        font-size: 1.6rem;
-        font-weight: 400;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+.snippet-header h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+}
 
-    .snippet-header h4 {
-        font-size: 1.2rem;
-        font-weight: 400;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+.snippet-header h4 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
     .snippet-header .detail-tags {
         display: flex;
@@ -62,7 +69,9 @@
 
 .snippet-code {
     flex: 1;
+    position: relative;
     background: linear-gradient(to right, #402828, #3D2622);
+    opacity: 90%;
     color: white;
     padding: 30px;
     margin-left: 10px;
@@ -71,11 +80,30 @@
     border-radius: 20px;
 }
 
+    .snippet-code::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .snippet-code::-webkit-scrollbar-track {
+        background: #3D2622;
+        border-radius: 20px;
+        margin: 14px 0;
+    }
+
+    .snippet-code::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        border-radius: 5px;
+    }
+
+        .snippet-code::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+        }
+
     .snippet-code pre {
-        background-color: rgba(0, 0, 0, 0.2);
         padding: 20px;
         border-radius: 8px;
         overflow-x: auto;
+        background-color: rgba(0, 0, 0, 0.2) !important;
     }
 
     .snippet-code code {
@@ -85,7 +113,6 @@
     }
 
 .detail-actions {
-    background-color: #472C2D;
     padding: 30px;
     display: flex;
     gap: 20px;
@@ -115,4 +142,17 @@
 .btn-delete {
     background-color: #613C3F;
     color: white;
+}
+
+#copy-button {
+    position: absolute;
+    right: 50px;
+    top: 55px;
+    opacity: 20%;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+
+#copy-button:hover {
+    opacity: 100%;
 }

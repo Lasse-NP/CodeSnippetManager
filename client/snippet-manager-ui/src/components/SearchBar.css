@@ -1,20 +1,25 @@
 /* SearchBar.css */
 .search-bar {
-    padding: 20px;
     color: white;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
 }
 
     .search-bar h2 {
-        margin-bottom: 10px;
+        margin: 10px;
         font-size: 1.5rem;
+        font-weight: 400;
+        text-align: center;
     }
 
     .search-bar input {
         background-color: #34201d;
-        width: 100%;
+        width: 75%;
         padding: 10px;
         font-size: 1rem;
         border: solid 3px transparent;
         border-image: linear-gradient(to right, #422F27, #42272C);
         border-image-slice: 1;
+        margin-left: 20px;
     }

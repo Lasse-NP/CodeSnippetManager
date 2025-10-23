@@ -37,58 +37,63 @@ function StartPage({ onNavigateToView, onSnippetsFetched }) {
 
     return (
         <div className="start-page">
-            <div className="start-header">
-                <h1>Welcome to Snippet Manager</h1>
-                <p>Organize and manage your code snippets efficiently</p>
-            </div>
-
-            <div className="start-actions">
-                <button
-                    className="btn-view-all"
-                    onClick={() => onNavigateToView(null)}>
-                    Start Now
-                </button>
-            </div>
-
-            <div className="recent-snippets">
-                <h2>Recent Snippets</h2>
-                {loading ? (
-                    <p className="loading-message">Loading snippets...</p>
-                ) : recentSnippets.length > 0 ? (
-                    <div className="snippet-grid">
-                        {recentSnippets.map(snippet => (
-                            <div
-                                key={snippet.id}
-                                className="snippet-card"
-                                onClick={() => handleSnippetClick(snippet.id)}
-                            >
-                                <h3>{snippet.title}</h3>
-                                <p className="snippet-language">{snippet.language}</p>
-                                {snippet.tags && snippet.tags.length > 0 && (
-                                    <div className="snippet-tags">
-                                        {snippet.tags.slice(0, 3).map((tag, idx) => (
-                                            <span key={idx} className="tag">
-                                                {typeof tag === 'string' ? tag : tag.name}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p className="no-snippets">No snippets yet. Create your first one!</p>
-                )}
-            </div>
-
-            <div className="start-stats">
-                <div className="stat-card">
-                    <h3>{recentSnippets.length > 0 ? `${recentSnippets.length}+` : '0'}</h3>
-                    <p>Code Snippets</p>
+            <div className="start-top">
+                <div className="start-header">
+                    <h1>Welcome to Snippet Manager</h1>
+                    <p>Organize and manage your code snippets efficiently</p>
                 </div>
-                <div className="stat-card">
-                    <h3>Ready</h3>
-                    <p>To Organize</p>
+            </div>
+            <div className="start-middle">
+                <div className="start-actions">
+                    <button
+                        className="btn-view-all"
+                        onClick={() => onNavigateToView(null)}>
+                        Start Now
+                    </button>
+                </div>
+            </div>
+
+            <div className="start-bottom">
+                <div className="recent-snippets">
+                    <h2>Recent Snippets</h2>
+                    {loading ? (
+                        <p className="loading-message">Loading snippets...</p>
+                    ) : recentSnippets.length > 0 ? (
+                        <div className="snippet-grid">
+                            {recentSnippets.map(snippet => (
+                                <div
+                                    key={snippet.id}
+                                    className="snippet-card"
+                                    onClick={() => handleSnippetClick(snippet.id)}
+                                >
+                                    <h3>{snippet.title}</h3>
+                                    <p className="snippet-language">{snippet.language}</p>
+                                    {snippet.tags && snippet.tags.length > 0 && (
+                                        <div className="snippet-tags">
+                                            {snippet.tags.slice(0, 3).map((tag, idx) => (
+                                                <span key={idx} className="tag">
+                                                    {typeof tag === 'string' ? tag : tag.name}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-snippets">No snippets yet. Create your first one!</p>
+                    )}
+                </div>
+
+                <div className="start-stats">
+                    <div className="stat-card">
+                        <h3>{recentSnippets.length > 0 ? `${recentSnippets.length}+` : '0'}</h3>
+                        <p>Code Snippets</p>
+                    </div>
+                    <div className="stat-card">
+                        <h3>Ready</h3>
+                        <p>To Organize</p>
+                    </div>
                 </div>
             </div>
         </div>

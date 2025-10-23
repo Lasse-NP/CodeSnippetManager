@@ -1,17 +1,18 @@
-.snippet-create {
+#snippet-create {
+    background: linear-gradient(90deg, #5a3840, #472C2D, #3d2328);
     height: 100%;
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-    .snippet-create label {
+    #snippet-create label {
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
-    .snippet-create h2 {
+    #snippet-create h2 {
         text-align: center;
         margin-top: 15px;
         padding: 10px;
@@ -19,7 +20,7 @@
         font-weight: 400;
     }
 
-    .snippet-create input {
+    #snippet-create input {
         font-size: 1.5rem;
         background-color: #34201d;
         width: 100%;
@@ -28,9 +29,10 @@
         border: solid 3px transparent;
         border-image: linear-gradient(to right, #66493C, #633A3F);
         border-image-slice: 1;
+        transition: box-shadow 0.3s ease;
     }
 
-    .snippet-create textarea {
+    #snippet-create textarea {
         font-size: 1.2rem;
         background-color: #34201d;
         width: 100%;
@@ -39,6 +41,9 @@
         border: solid 3px transparent;
         border-image: linear-gradient(to right, #66493C, #633A3F);
         border-image-slice: 1;
+        transition: box-shadow 0.3s ease;
+        scrollbar-width: thin;
+        scrollbar-color: #66493C #34201e;
     }
 
 .attributes {
@@ -47,6 +52,85 @@
     text-align: center;
     font-size: 1.4rem;
 }
+
+#dropdown-lan-create-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin: 5px;
+}
+
+#dropdown-lan-create-button {
+    padding: 6px 6px;
+    border: solid 4px;
+    border-color: #34201e;
+    border-radius: 4px;
+    background: linear-gradient(to right, #66493C, #633A3F);
+    cursor: pointer;
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: inherit;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+    #dropdown-lan-create-button:hover {
+        border-color: #633A3F;
+        box-shadow: 0 0 8px 4px #613C3F;
+    }
+
+    #dropdown-lan-create-button.dropdown-open {
+        border-color: #633A3F;
+        box-shadow: 0 0 8px 4px #613C3F;
+    }
+
+    #dropdown-lan-create-button:focus {
+        outline: none;
+    }
+
+#create-dropdown-arrow {
+    margin-left: 10px;
+    font-size: 10px;
+}
+
+#create-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 30%;
+    right: 0;
+    width: 39%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: solid 3px;
+    border-color: #633A3F;
+    background: #34201e;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#create-dropdown-menu li {
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+    #create-dropdown-menu li:hover {
+        background-color: #673e3a;
+    }
+
+    #create-dropdown-menu li.selected {
+        background-image: linear-gradient(to right, #66493C, #633A3F);
+        font-weight: bold;
+    }
+
+
 
 .main-body {
     margin-left: 20%;
@@ -62,14 +146,14 @@
     font-size: 1.4rem;
 }
 
-.button-create-group {
+#button-create-group {
     display: flex;
     justify-content: center;
     margin: 40px;
     gap: 20px; /* Space between buttons */
 }
 
-    .button-create-group button {
+    #button-create-group button {
         padding: 15px 40px;
         font-size: 1.4rem;
         font-weight: 400;
@@ -79,17 +163,39 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-        .button-create-group button:hover {
+        #button-create-group button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-.btn-create {
+#create-dropdown-menu::-webkit-scrollbar, textarea::-webkit-scrollbar {
+    width: 6px;
+}
+
+#create-dropdown-menu::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
+    background: #34201e;
+}
+
+#create-dropdown-menu::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+    border-radius: 5px;
+}
+
+    #create-dropdown-menu::-webkit-scrollbar-thumb:hover, textarea::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #8a6450, #8a4c52);
+    }
+
+#btn-create-create {
     background-color: #613C3F;
     color: white;
 }
 
-.btn-cancel {
+#btn-cancel-create {
     background-color: #613C3F;
     color: white;
+}
+
+.attributes input:focus, .attributes ul:focus, textarea:focus, .tags input:focus {
+    outline: none;
+    box-shadow: 0 0 8px 4px #613C3F;
 }

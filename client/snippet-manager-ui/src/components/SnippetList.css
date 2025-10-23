@@ -7,10 +7,23 @@
     flex-direction: column;
 }
 
-    .snippet-list h2 {
-        margin-bottom: 15px;
-        font-size: 1.3rem;
+    .snippet-list::-webkit-scrollbar {
+        width: 8px;
     }
+
+    .snippet-list::-webkit-scrollbar-track {
+        background: #3D2622;
+        border-radius: 20px;
+    }
+
+    .snippet-list::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        border-radius: 5px;
+    }
+
+        .snippet-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+        }
 
 .snippets-container {
     display: flex;

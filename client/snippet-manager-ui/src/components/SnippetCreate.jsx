@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState, useRef, useEffect } from "react";
 import { snippetsAPI } from '../api';
 import './SnippetCreate.css';
 
@@ -10,6 +10,30 @@ export default function SnippetCreate({ onCreate, onCancel }) {
     const [tags, setTags] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    // Dropdown state
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    const languages = ["JavaScript", "Python", "Java", "CSharp", "CSS", "HTML", "XML", "SQL", "JSON", "JSX", "CSHTML"];
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            // Close if clicking outside both the button and the dropdown menu
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
+                setIsDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     function validate() {
         if (!title.trim()) return "Title is required.";
@@ -52,63 +76,84 @@ export default function SnippetCreate({ onCreate, onCancel }) {
     }
 
     return (
-        <div className="snippet-create">
+        <div id="snippet-create">
             <h2>Create New Snippet</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="attributes">
-                <label>
-                    Title:
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Description:
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Language:
-                    <input
-                        type="text"
-                        value={language}
-                        onChange={e => setLanguage(e.target.value)}
-                    />
+                    <label>
+                        Title:
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
+                        />
                     </label>
+                    <label>
+                        Description:
+                        <input
+                            type="text"
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
+                        />
+                    </label>
+                    <div id="dropdown-lan-create-container">
+                        <label>Language:</label>
+                        <button
+                            ref={buttonRef}
+                            type="button"
+                            className={`dropdown-button ${isDropdownOpen ? 'dropdown-open' : ''}`}
+                            id="dropdown-lan-create-button"
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        >
+                            {language || "Select Language"}
+                            <span className="dropdown-arrow" id="create-dropdown-arrow">{isDropdownOpen ? "▲" : "▼"}</span>
+                        </button>
+                        {isDropdownOpen && (
+                            <ul className="dropdown-menu" id="create-dropdown-menu" ref={dropdownRef}>
+                                {languages.map((lang) => (
+                                    <li
+                                        key={lang}
+                                        className={lang === language ? "selected" : ""}
+                                        onClick={() => {
+                                            setLanguage(lang);
+                                            setIsDropdownOpen(false);
+                                        }}
+                                    >
+                                        {lang}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
                 <div className="main-body">
-                <label>
-                    Code:
-                    <textarea
-                        value={code}
-                        onChange={e => setCode(e.target.value)}
-                        rows={10}
-                    />
+                    <label>
+                        Code:
+                        <textarea
+                            value={code}
+                            onChange={e => setCode(e.target.value)}
+                            rows={10}
+                        />
                     </label>
                 </div>
                 <div className="tags">
-                <label>
-                    Tags:
-                    <input
-                        type="text"
-                        value={tags}
-                        onChange={e => setTags(e.target.value)}
-                        placeholder="react, javascript, hooks"
-                    />
+                    <label>
+                        Tags:
+                        <input
+                            type="text"
+                            value={tags}
+                            onChange={e => setTags(e.target.value)}
+                            placeholder="react, javascript, hooks"
+                        />
                     </label>
                 </div>
-                <div className="button-create-group">
-                    <button className="btn-create" type="submit" disabled={loading}>
+                <div id="button-create-group">
+                    <button id="btn-create-create" type="submit" disabled={loading}>
                         {loading ? "Creating..." : "Create"}
                     </button>
                     {onCancel && (
-                        <button className="btn-cancel" type="button" onClick={onCancel} disabled={loading}>
+                        <button id="btn-cancel-create" type="button" onClick={onCancel} disabled={loading}>
                             Cancel
                         </button>
                     )}

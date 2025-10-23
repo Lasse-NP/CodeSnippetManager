@@ -1,8 +1,16 @@
-/* App.css */
-* {
+#root {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 body {
@@ -11,14 +19,12 @@ body {
 
 .App {
     height: 100vh;
-    width: 100vw;
     display: flex;
     flex-direction: column;
 }
 
 .start-view {
     flex: 1;
-    background: linear-gradient(45deg, #543540, #472C2D, #573531);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -28,30 +34,25 @@ body {
 .main-layout {
     display: flex;
     flex: 1;
-    overflow: hidden;
+    overflow: hidden; /* Change from overflow-x: hidden, overflow-y: auto */
+    width: 100%;
 }
 
 .sidebar {
     width: 300px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     background-color: #2c1c1c;
+    overflow-y: auto;
 }
 
-.detail-view {
-    flex: 1;
-    background-color: #472C2D;
-    display: flex;
-}
-
-.create-view {
-    flex: 1;
-    background-color: #472C2D;
-    display: flex;
-}
-
+.create-view,
+.detail-view,
 .update-view {
     flex: 1;
-    background-color: #472C2D;
     display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-width: 0;
 }
