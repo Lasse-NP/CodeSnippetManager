@@ -28,7 +28,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
 
         script.onload = () => {
             // Load common language support after main Prism loads
-            const languages = ['javascript', 'python', 'java', 'csharp', 'css', 'markup'];
+            const languages = ['javascript', 'python', 'java', 'csharp', 'css', 'markup', 'sql', 'json', 'jsx', 'cshtml'];
             let loadedCount = 0;
 
             languages.forEach(lang => {
