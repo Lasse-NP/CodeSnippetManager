@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://localhost:7001/api'
+const API_BASE_URL = 'http://192.168.0.139:5000/api'
 
 const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
