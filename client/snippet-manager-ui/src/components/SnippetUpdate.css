@@ -6,18 +6,37 @@
     flex: 1;
 }
 
-    #snippet-update label {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    #snippet-update h2 {
+    #snippet-update #update-title {
         text-align: center;
         margin-top: 15px;
         padding: 10px;
         font-size: 2rem;
         font-weight: 400;
+    }
+
+#update-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    flex: 1;
+    background: linear-gradient(135deg, #3d2328, #472C2D, #5a3840);
+}
+
+
+#update-attributes {
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+    #update-attributes label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     #snippet-update input {
@@ -31,27 +50,6 @@
         border-image-slice: 1;
         transition: box-shadow 0.3s ease;
     }
-
-    #snippet-update textarea {
-        font-size: 1.2rem;
-        background-color: #34201d;
-        width: 100%;
-        padding: 10px;
-        font-size: 1rem;
-        border: solid 3px transparent;
-        border-image: linear-gradient(to right, #66493C, #633A3F);
-        border-image-slice: 1;
-        transition: box-shadow 0.3s ease;
-        scrollbar-width: thin;
-        scrollbar-color: #66493C #34201e;
-    }
-
-.attributes {
-    margin-left: 30%;
-    margin-right: 30%;
-    text-align: center;
-    font-size: 1.4rem;
-}
 
 #dropdown-lan-update-container {
     position: relative;
@@ -130,28 +128,59 @@
             font-weight: bold;
         }
 
-.main-body {
+    #update-dropdown-menu::-webkit-scrollbar, textarea::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #update-dropdown-menu::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
+        background: #34201e;
+    }
+
+    #update-dropdown-menu::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        border-radius: 5px;
+    }
+
+        #update-dropdown-menu::-webkit-scrollbar-thumb:hover, textarea::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+        }
+
+#update-code {
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
     font-size: 1.4rem;
 }
 
-.tags {
+    #update-code textarea {
+        font-size: 1.2rem;
+        background-color: #34201d;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: solid 3px transparent;
+        border-image: linear-gradient(to right, #66493C, #633A3F);
+        border-image-slice: 1;
+        transition: box-shadow 0.3s ease;
+        scrollbar-width: thin;
+        scrollbar-color: #66493C #34201e;
+    }
+
+#update-tags {
     margin-left: 25%;
     margin-right: 25%;
     text-align: center;
     font-size: 1.4rem;
 }
 
-#button-update-group {
+#update-buttons {
     display: flex;
     justify-content: center;
     margin: 40px;
     gap: 20px; /* Space between buttons */
 }
 
-    #button-update-group button {
+    #update-buttons button {
         padding: 15px 40px;
         font-size: 1.4rem;
         font-weight: 400;
@@ -161,39 +190,22 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-        #button-update-group button:hover {
+        #update-buttons button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-#update-dropdown-menu::-webkit-scrollbar, textarea::-webkit-scrollbar {
-    width: 6px;
-}
-
-#update-dropdown-menu::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
-    background: #34201e;
-}
-
-#update-dropdown-menu::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #7e5b4b, #7c474d);
-    border-radius: 5px;
-}
-
-    #update-dropdown-menu::-webkit-scrollbar-thumb:hover, textarea::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(to bottom, #8a6450, #8a4c52);
-    }
-
-#btn-update-update {
+#update-submit-btn {
     background-color: #613C3F;
     color: white;
 }
 
-#btn-cancel-update {
+#update-cancel-btn {
     background-color: #613C3F;
     color: white;
 }
 
-.attributes input:focus, .attributes ul:focus, textarea:focus, .tags input:focus {
+#update-attributes input:focus, #update-attributes ul:focus, #update-code textarea:focus, #update-tags input:focus {
     outline: none;
     box-shadow: 0 0 8px 4px #613C3F;
 }

@@ -59,16 +59,16 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
 
     if (loading) {
         return (
-            <div className="snippet-list">
-                <h2>List of Snippets</h2>
-                <p>Loading... {retryCount > 0 && `(Retry attempt ${retryCount})`}</p>
+            <div className="loading" id="list-loading">
+                <p>Loading...</p>
+                <p>{retryCount > 0 && `(Retry attempt ${retryCount})`}</p>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="snippet-list">
+            <div className="exception" id="list-error">
                 <h2>List of Snippets</h2>
                 <p className="error">{error}</p>
                 <p className="retry-info">Retry attempt {retryCount}...</p>
@@ -77,12 +77,12 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
     }
 
     return (
-        <div className="snippet-list">
-            <div className="snippets-container">
+        <div className="list" id="snippet-list">
+            <div className="container" id="snippet-container">
                 {filteredSnippets.length === 0 ? (<p>No snippets found</p>
                     ) : (
                     filteredSnippets.map(snippet => (
-                        <div key={snippet.id} className={`snippet-item ${selectedSnippetId === snippet.id ? 'selected' : ''}`} onClick={() => setSelectedSnippetId(snippet.id)}>
+                        <div key={snippet.id} id="snippet-item" className={`snippet-item ${selectedSnippetId === snippet.id ? 'selected' : ''}`} onClick={() => setSelectedSnippetId(snippet.id)}>
                             <h3>{snippet.title}</h3>
                             <p>{snippet.language}</p>
                         </div>

@@ -1,19 +1,19 @@
 /* SearchBar.css */
-.search-bar {
+#snippet-search {
     color: white;
     padding-left: 0px;
     display: flex;
     flex-direction: column;
 }
 
-    .search-bar h2 {
+    #snippet-search h2 {
         margin: 10px;
         font-size: 1.5rem;
         font-weight: 400;
         text-align: center;
     }
 
-    .search-bar input {
+    #snippet-search input {
         background-color: #34201d;
         width: 75%;
         padding: 10px;

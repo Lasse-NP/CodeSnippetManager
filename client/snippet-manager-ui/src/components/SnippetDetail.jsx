@@ -45,12 +45,6 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
         };
 
         document.head.appendChild(script);
-
-        // Cleanup function
-        return () => {
-            // Note: In practice, you might want to keep Prism loaded
-            // This is just for demonstration of proper cleanup
-        };
     }, []);
 
     useEffect(() => {
@@ -82,7 +76,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
 
     if (loading) {
         return (
-            <div className="snippet-detail empty">
+            <div className="loading" id="view-loading">
                 <p>Loading...</p>
             </div>
         );
@@ -90,7 +84,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
 
     if (error) {
         return (
-            <div className="snippet-detail empty">
+            <div className="exception" id="view-error">
                 <p className="error">{error}</p>
             </div>
         );
@@ -98,7 +92,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
 
     if (!selectedSnippetId) {
         return (
-            <div className="snippet-detail no-selection">
+            <div className="no-selection" id="no-snippet-view">
                 <p>No Snippet Selected</p>
             </div>
         );
@@ -106,7 +100,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
 
     if (!snippet) {
         return (
-            <div className="snippet-detail loading">
+            <div className="pending" id="view-pending">
                 <p id="detail-loading">Loading Snippet Details...</p>
             </div>
         );
@@ -142,12 +136,14 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     };
 
     return (
-        <div className="snippet-detail">
-            <div className="snippet-header">
-                <div className="language-badge">{snippet.language}</div>
-                <h2>{snippet.title}</h2>
+        <div className="body" id="snippet-view">
+            <div className="attributes" id="view-attributes">
+                <div className="title" id="title-language">
+                    <p className="badge" id="view-language-badge">{snippet.language}</p>
+                    <h2>{snippet.title}</h2>
+                </div>
                 <h4>{snippet.description}</h4>
-                <div className="detail-tags">
+                <div className="tags" id="view-tags">
                     {snippet.tags.slice(0, snippet.tags.length).map((tag, idx) => (
                         <span key={idx} className="tag">
                             {typeof tag === 'string' ? tag : tag.name}
@@ -155,7 +151,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
                     ))}
                 </div>
             </div>
-            <div className="snippet-code">
+            <div className="code" id="view-code">
                 <pre>
                     <code ref={codeRef} className={`language-${snippet?.language.toLowerCase() || 'javascript'}`}>
                         {snippet.code}
@@ -166,11 +162,11 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
                 </pre>
             </div>
 
-            <div className="detail-actions">
-                <button className="btn-update" onClick={handleUpdate}>
+            <div className="button-group" id="view-buttons">
+                <button id="update-initiate-btn" onClick={handleUpdate}>
                     Update
                 </button>
-                <button className="btn-delete" onClick={handleDelete}>
+                <button id="delete-initiate-btn" onClick={handleDelete}>
                     Delete
                 </button>
             </div>

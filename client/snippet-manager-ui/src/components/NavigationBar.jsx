@@ -17,7 +17,7 @@ function NavigationBar({ currentView, setCurrentView }) {
     };
 
     return (
-        <nav className="navigation-bar">
+        <nav className="navigation-bar" id="navigation">
             <svg xmlns="http://www.w3.org/2000/svg" alt="Logo" className="nav-logo" viewBox="0 0 472.615 472.615" onClick={showStart}>
                 <g>
                     <g>
@@ -38,7 +38,7 @@ function NavigationBar({ currentView, setCurrentView }) {
                     </g>
                 </g>
             </svg>
-            <div className="button-group">
+            <div className="button-group" id="nav-buttons">
                 <button className={`btn-view ${currentView === 'view' ? 'active' : ''}`} onClick={showView}>View Snippets</button>
                 <button className={`btn-create ${currentView === 'create' ? 'active' : ''}`} onClick={showCreate}>Create Snippet</button>
             </div>

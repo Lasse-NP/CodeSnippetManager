@@ -1,4 +1,4 @@
-.snippet-list {
+#snippet-list {
     flex: 1;
     padding: 20px;
     color: white;
@@ -7,54 +7,74 @@
     flex-direction: column;
 }
 
-    .snippet-list::-webkit-scrollbar {
+    #snippet-list::-webkit-scrollbar {
         width: 8px;
     }
 
-    .snippet-list::-webkit-scrollbar-track {
+    #snippet-list::-webkit-scrollbar-track {
         background: #3D2622;
         border-radius: 20px;
     }
 
-    .snippet-list::-webkit-scrollbar-thumb {
+    #snippet-list::-webkit-scrollbar-thumb {
         background: linear-gradient(to bottom, #7e5b4b, #7c474d);
         border-radius: 5px;
     }
 
-        .snippet-list::-webkit-scrollbar-thumb:hover {
+        #snippet-list::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(to bottom, #8a6450, #8a4c52);
         }
 
-.snippets-container {
+#list-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    flex: 1;
+}
+
+#list-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    flex: 1;
+}
+
+#snippet-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.snippet-item {
-    background-color: rgba(255, 255, 255, 0.2);
-    background: linear-gradient(to right, #422F27, #42272C);
-    padding: 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 3px solid transparent;
-    transition: box-shadow 0.5s ease;
-}
-
-    .snippet-item:hover {
-        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+    #snippet-container #snippet-item {
+        background-color: rgba(255, 255, 255, 0.2);
+        background: linear-gradient(to right, #422F27, #42272C);
+        padding: 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: box-shadow 0.5s ease;
     }
 
-    .snippet-item.selected {
-        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
-    }
+        #snippet-container #snippet-item:hover {
+            box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+        }
 
-    .snippet-item h3 {
-        margin-bottom: 5px;
-        font-size: 1rem;
-    }
+        #snippet-container #snippet-item.selected {
+            box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+        }
 
-    .snippet-item p {
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
+        #snippet-container #snippet-item h3 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        #snippet-container #snippet-item p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }

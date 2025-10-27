@@ -113,19 +113,18 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
 
     if (fetchingSnippet) {
         return (
-            <div className="snippet-update">
-                <h2>Update Snippet</h2>
+            <div className="loading" id="update-loading">
                 <p>Loading snippet data...</p>
             </div>
         );
     }
 
     return (
-        <div id="snippet-update">
-            <h2>Update Snippet</h2>
+        <div className="body" id="snippet-update">
+            <h2 id="update-title">Update Snippet</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
-                <div className="attributes">
+                <div className="attributes" id="update-attributes">
                     <label>
                         Title:
                         <input
@@ -152,7 +151,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                         >
                             {language || "Select Language"}
-                            <span className="dropdown-arrow" id="update-dropdown-arrow">{isDropdownOpen ? "▲" : "▼"}</span>
+                            <span className="dropdown-arrow" id="update-dropdown-arrow">{isDropdownOpen ? "▼" : "▲"}</span>
                         </button>
                         {isDropdownOpen && (
                             <ul className="dropdown-menu" id="update-dropdown-menu" ref={dropdownRef}>
@@ -172,7 +171,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                         )}
                     </div>
                 </div>
-                <div className="main-body">
+                <div className="code" id="update-code">
                     <label>
                         Code:
                         <textarea
@@ -182,7 +181,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                         />
                     </label>
                 </div>
-                <div className="tags">
+                <div className="tags" id="update-tags">
                     <label>
                         Tags:
                         <input
@@ -193,12 +192,12 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                         />
                     </label>
                 </div>
-                <div id="button-update-group">
-                    <button id="btn-update-update" type="submit" disabled={loading}>
+                <div className="button-group" id="update-buttons">
+                    <button id="update-submit-btn" type="submit" disabled={loading}>
                         {loading ? "Updating..." : "Update"}
                     </button>
                     {onCancel && (
-                        <button id="btn-cancel-update" type="button" onClick={onCancel} disabled={loading}>
+                        <button id="update-cancel-btn" type="button" onClick={onCancel} disabled={loading}>
                             Cancel
                         </button>
                     )}

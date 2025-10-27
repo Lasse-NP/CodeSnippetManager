@@ -6,13 +6,7 @@
     flex: 1;
 }
 
-    #snippet-create label {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    #snippet-create h2 {
+    #snippet-create #create-title {
         text-align: center;
         margin-top: 15px;
         padding: 10px;
@@ -20,7 +14,13 @@
         font-weight: 400;
     }
 
-    #snippet-create input {
+#create-attributes {
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+}
+
+    #create-attributes input, #create-tags input {
         font-size: 1.5rem;
         background-color: #34201d;
         width: 100%;
@@ -31,27 +31,6 @@
         border-image-slice: 1;
         transition: box-shadow 0.3s ease;
     }
-
-    #snippet-create textarea {
-        font-size: 1.2rem;
-        background-color: #34201d;
-        width: 100%;
-        padding: 10px;
-        font-size: 1rem;
-        border: solid 3px transparent;
-        border-image: linear-gradient(to right, #66493C, #633A3F);
-        border-image-slice: 1;
-        transition: box-shadow 0.3s ease;
-        scrollbar-width: thin;
-        scrollbar-color: #66493C #34201e;
-    }
-
-.attributes {
-    margin-left: 30%;
-    margin-right: 30%;
-    text-align: center;
-    font-size: 1.4rem;
-}
 
 #dropdown-lan-create-container {
     position: relative;
@@ -115,45 +94,76 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-#create-dropdown-menu li {
-    padding: 10px 12px;
-    cursor: pointer;
-    transition: background-color 0.1s ease;
-}
-
-    #create-dropdown-menu li:hover {
-        background-color: #673e3a;
+    #create-dropdown-menu li {
+        padding: 10px 12px;
+        cursor: pointer;
+        transition: background-color 0.1s ease;
     }
 
-    #create-dropdown-menu li.selected {
-        background-image: linear-gradient(to right, #66493C, #633A3F);
-        font-weight: bold;
+        #create-dropdown-menu li:hover {
+            background-color: #673e3a;
+        }
+
+        #create-dropdown-menu li.selected {
+            background-image: linear-gradient(to right, #66493C, #633A3F);
+            font-weight: bold;
+        }
+
+    #create-dropdown-menu::-webkit-scrollbar, #create-code textarea::-webkit-scrollbar {
+        width: 6px;
     }
 
+    #create-dropdown-menu::-webkit-scrollbar-track, #create-code textarea::-webkit-scrollbar-track {
+        background: #34201e;
+    }
+
+    #create-dropdown-menu::-webkit-scrollbar-thumb, #create-code textarea::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        border-radius: 5px;
+    }
+
+        #create-dropdown-menu::-webkit-scrollbar-thumb:hover, #create-code textarea::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+        }
 
 
-.main-body {
+
+#create-code {
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
     font-size: 1.4rem;
 }
 
-.tags {
+    #create-code textarea {
+        font-size: 1.2rem;
+        background-color: #34201d;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: solid 3px transparent;
+        border-image: linear-gradient(to right, #66493C, #633A3F);
+        border-image-slice: 1;
+        transition: box-shadow 0.3s ease;
+        scrollbar-width: thin;
+        scrollbar-color: #66493C #34201e;
+    }
+
+#create-tags {
     margin-left: 25%;
     margin-right: 25%;
     text-align: center;
     font-size: 1.4rem;
 }
 
-#button-create-group {
+#create-buttons {
     display: flex;
     justify-content: center;
     margin: 40px;
     gap: 20px; /* Space between buttons */
 }
 
-    #button-create-group button {
+    #create-buttons button {
         padding: 15px 40px;
         font-size: 1.4rem;
         font-weight: 400;
@@ -163,39 +173,28 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-        #button-create-group button:hover {
+        #create-buttons button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-#create-dropdown-menu::-webkit-scrollbar, textarea::-webkit-scrollbar {
-    width: 6px;
-}
-
-#create-dropdown-menu::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
-    background: #34201e;
-}
-
-#create-dropdown-menu::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #7e5b4b, #7c474d);
-    border-radius: 5px;
-}
-
-    #create-dropdown-menu::-webkit-scrollbar-thumb:hover, textarea::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(to bottom, #8a6450, #8a4c52);
-    }
-
-#btn-create-create {
+.button-group #create-submit-btn {
     background-color: #613C3F;
     color: white;
 }
 
-#btn-cancel-create {
+.button-group #create-cancel-btn {
     background-color: #613C3F;
     color: white;
 }
 
-.attributes input:focus, .attributes ul:focus, textarea:focus, .tags input:focus {
+#create-attributes label, #create-code label, #create-tags label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#create-attributes input:focus, #create-attributes ul:focus, #create-code textarea:focus, #create-tags input:focus {
     outline: none;
     box-shadow: 0 0 8px 4px #613C3F;
 }

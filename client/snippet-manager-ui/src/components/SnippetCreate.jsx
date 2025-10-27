@@ -76,11 +76,11 @@ export default function SnippetCreate({ onCreate, onCancel }) {
     }
 
     return (
-        <div id="snippet-create">
-            <h2>Create New Snippet</h2>
+        <div className="body" id="snippet-create">
+            <h2 id="create-title">Create New Snippet</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
-                <div className="attributes">
+                <div className="attributes" id="create-attributes">
                     <label>
                         Title:
                         <input
@@ -127,7 +127,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                         )}
                     </div>
                 </div>
-                <div className="main-body">
+                <div className="code" id="create-code">
                     <label>
                         Code:
                         <textarea
@@ -137,7 +137,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                         />
                     </label>
                 </div>
-                <div className="tags">
+                <div className="tags" id="create-tags">
                     <label>
                         Tags:
                         <input
@@ -148,12 +148,12 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                         />
                     </label>
                 </div>
-                <div id="button-create-group">
-                    <button id="btn-create-create" type="submit" disabled={loading}>
+                <div className="button-group" id="create-buttons">
+                    <button id="create-submit-btn" type="submit" disabled={loading}>
                         {loading ? "Creating..." : "Create"}
                     </button>
                     {onCancel && (
-                        <button id="btn-cancel-create" type="button" onClick={onCancel} disabled={loading}>
+                        <button id="create-cancel-btn" type="button" onClick={onCancel} disabled={loading}>
                             Cancel
                         </button>
                     )}

@@ -1,5 +1,5 @@
 /* NavigationBar.css */
-.navigation-bar {
+#navigation {
     background-color: #251515;
     background: linear-gradient(to bottom, #150505 1%, #251515);
     color: white;
@@ -11,13 +11,13 @@
     width: 100%; /* Add this */
 }
 
-.button-group {
+#nav-buttons {
     margin-left: 120px;
     display: flex;
     gap: 20px;
 }
 
-.navigation-bar button {
+#navigation button {
     font-size: 1.8rem;
     font-weight: 400;
     background-color: rgba(255,255,255,0.1);
@@ -28,22 +28,22 @@
     transition: box-shadow 0.5s ease;
 }
 
-.navigation-bar button:hover {
-    box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
-}
+    #navigation button:hover {
+        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+    }
 
-    .navigation-bar button:focus {
+    #navigation button:focus {
         outline: none;
         box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
     }
 
-    .navigation-bar button:active {
+    #navigation button:active {
         outline: none;
         box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
     }
 
 
-.navigation-bar svg {
+#navigation svg {
     fill: white;
     width: 80px;
     height: auto;
@@ -55,6 +55,6 @@
     transition: filter 0.5s ease;
 }
 
-    .navigation-bar svg:hover {
+    #navigation svg:hover {
         filter: drop-shadow(2px 2px 10px #543540) drop-shadow(-2px -2px 10px #82455B);
     }

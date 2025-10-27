@@ -1,29 +1,5 @@
 const API_BASE_URL = 'http://192.168.0.139:5000/api'
 
-const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
-    for (let attempt = 0; attempt <= maxRetries; attempt++) {
-        try {
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response;
-        } catch (error) {
-            // If this was the last attempt, throw the error
-            if (attempt === maxRetries) {
-                throw error;
-            }
-
-            // Calculate delay: 1s, 2s, 4s, 8s...
-            const delay = Math.pow(2, attempt) * 1000;
-            console.log(`Attempt ${attempt + 1} failed. Retrying in ${delay}ms...`);
-
-            // Wait before retrying
-            await new Promise(resolve => setTimeout(resolve, delay));
-        }
-    }
-};
-
 export const snippetsAPI = {
     // Get all snippets
     getAllSnippets: async () => {
