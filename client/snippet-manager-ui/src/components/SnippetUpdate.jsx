@@ -141,7 +141,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                             onChange={e => setDescription(e.target.value)}
                         />
                     </label>
-                    <div id="dropdown-lan-update-container">
+                    <div className="dropdown" id="dropdown-lan-update-container">
                         <label>Language:</label>
                         <button
                             ref={buttonRef}

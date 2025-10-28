@@ -97,7 +97,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                             onChange={e => setDescription(e.target.value)}
                         />
                     </label>
-                    <div id="dropdown-lan-create-container">
+                    <div className="dropdown" id="dropdown-lan-create-container">
                         <label>Language:</label>
                         <button
                             ref={buttonRef}

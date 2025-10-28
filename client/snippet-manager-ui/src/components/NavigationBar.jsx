@@ -1,8 +1,28 @@
-import React from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import './NavigationBar.css';
 import ReactLogo from '../assets/icon.svg';
 
-function NavigationBar({ currentView, setCurrentView }) {
+function NavigationBar({ currentView, setCurrentView, setServer, server }) {
+    // Dropdown state
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            // Close if clicking outside both the button and the dropdown menu
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
+                setIsDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const showStart = () => {
         setCurrentView('start');
@@ -41,6 +61,26 @@ function NavigationBar({ currentView, setCurrentView }) {
             <div className="button-group" id="nav-buttons">
                 <button className={`btn-view ${currentView === 'view' ? 'active' : ''}`} onClick={showView}>View Snippets</button>
                 <button className={`btn-create ${currentView === 'create' ? 'active' : ''}`} onClick={showCreate}>Create Snippet</button>
+            </div>
+            <div className="dropdown" id="dropdown-serverpicker-container">
+                <button
+                    ref={buttonRef}
+                    type="button"
+                    className={`dropdown-button ${isDropdownOpen ? 'dropdown-open' : ''}`}
+                    id="dropdown-serverpicker-button"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                    {server || "Select Server"}
+                    <span className="dropdown-arrow" id="serverpicker-dropdown-arrow">{isDropdownOpen ? "▲" : "▼"}</span>
+                </button>
+                {isDropdownOpen && (
+                    <ul className="dropdown-menu" id="serverpicker-dropdown-menu" ref={dropdownRef}>
+                        <li className="server" id="remote-server" onClick={() => { setServer("Remote"); setIsDropdownOpen(false);}}
+                        >Remote</li>
+                        <li className="server" id="local-server" onClick={() => { setServer("Local"); setIsDropdownOpen(false); }}
+                        >Local</li>
+                    </ul>
+                )}
             </div>
         </nav>
     );

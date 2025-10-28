@@ -7,6 +7,7 @@ import SnippetDetail from './components/SnippetDetail';
 import SnippetCreate from './components/SnippetCreate';
 import SnippetUpdate from './components/SnippetUpdate';
 import StartPage from './components/StartPage';
+import { setServer } from './api';
 
 function App() {
     // State to track which snippet is selected
@@ -19,6 +20,8 @@ function App() {
     const [cachedSnippets, setCachedSnippets] = useState(null);
     // State to track when to refresh
     const [refreshTrigger, setRefreshTrigger] = useState(0);
+    // State for server selection
+    const [server, setServerState] = useState("Remote");
 
     const handleCreateSnippet = (newSnippet) => {
         setCurrentView('view');
@@ -65,6 +68,15 @@ function App() {
         setCachedSnippets(snippets);
     };
 
+    const handleServerChange = (newServer) => {
+        setServerState(newServer);
+        setServer(newServer); // Update the API module
+        // Clear cache and refresh when server changes
+        setCachedSnippets(null);
+        setSelectedSnippetId(null);
+        setRefreshTrigger(prev => prev + 1);
+    };
+
     // Render StartPage
     if (currentView === 'start') {
         return (
@@ -84,6 +96,8 @@ function App() {
             <NavigationBar
                 currentView={currentView}
                 setCurrentView={setCurrentView}
+                setServer={handleServerChange}
+                server={server}
             />
 
 
