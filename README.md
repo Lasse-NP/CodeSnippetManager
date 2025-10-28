@@ -39,4 +39,7 @@ The layout of the main page is as shown below. It allows the main use of the sys
 
 The detailed view of the snippets is complete with languages, a title, a description of the snippet, the code itself (With syntax coloring), and lastly searchable tags. The code section contains a clickable button which copies the code directly into your Copy-Paste. Two buttons exists within the view, one to delete the snippet and another that allows you to change the selected snippets data.
 
-<img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/21ec1dba-cda2-4aed-aa12-9c0cc8fb0afe" /> <img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/fdccebf5-c2f2-49dc-9f61-73fa2c648205" />
+<p align="center">
+<img width="49%" alt="image" src="https://github.com/user-attachments/assets/21ec1dba-cda2-4aed-aa12-9c0cc8fb0afe" />
+<img width="49%" alt="image" src="https://github.com/user-attachments/assets/fdccebf5-c2f2-49dc-9f61-73fa2c648205" />
+</p>
