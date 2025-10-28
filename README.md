@@ -13,12 +13,9 @@
 ## About The Project
 In this project, I have set out to built a Code Snippet Manager, backed by an MS-SQL Database, this program will be able to keep your important coding snippets within arms-reach wherever and whenever you need them. This tool will help you keep track of useful code, by letting you search, sort and filter through all of your saved coding snippets. This program supports tagging, allowing you to tag the coding snippets with whatever you feel fits them best, the tags allow for even more precise searching capabilities.
 
-The layout of the main page is as shown below, with a top navigation bar, a list of available snippets on the left bar, a search bar atop the left bar, and lastly a detailed view of the clicked snippet on the big right space.
-
-<img width="1513" height="970" alt="image" src="https://github.com/user-attachments/assets/4910a204-fcc3-4fd4-972f-1a018b9a6499" />
+<img width="1905" height="947" alt="image" src="https://github.com/user-attachments/assets/3c117b28-ef75-499d-97cf-31d2c141fb0e" />
 
 ## Roadmap
-
 - [x] Build Back-end
 - [x] Build Restful API
 - [x] Design Main Page
@@ -30,4 +27,14 @@ The layout of the main page is as shown below, with a top navigation bar, a list
 - [x] Design Start Page
 - [x] Finalize and Polish Design
 - [x] Enhance Visuals of Code
-- [ ] Switch to Permanent Database Solution
+- [x] Switch to Permanent Database Solution
+- [ ] Tag Auto-complete Functionality
+- [ ] Add Custom Databases To Database List Functionality
+- [ ] First Downloadable Release
+
+## How-To
+The layout of the main page is as shown below. It allows the main use of the system, where you are able to review saved snippets in detail. This structure of the top navigation bar and the sidebar, is kept throughout the different sections of the system. Notice the navigation bar contains a dropdown menu which allows the selection of which database to pull the snippet data from. Currently there is only two preset databases to pull from, a local one and a remote one of my own choosing.
+<img width="1899" height="937" alt="image" src="https://github.com/user-attachments/assets/3881a2f6-7f89-4246-a25e-0c9cc6d3104d" />
+
+The detailed view of the snippets is complete with languages, a title, a description of the snippet, the code itself (With syntax coloring), and lastly searchable tags. The code section contains a clickable button which copies the code directly into your Copy-Paste. Two buttons exists within the view, one to delete the snippet and another that allows you to change the selected snippets data.
+<img width="500" height="250" alt="image" src="https://github.com/user-attachments/assets/21ec1dba-cda2-4aed-aa12-9c0cc8fb0afe" /> <img width="500" height="250" alt="image" src="https://github.com/user-attachments/assets/fdccebf5-c2f2-49dc-9f61-73fa2c648205" />
