@@ -95,7 +95,12 @@ function App() {
         <div className="App">
             <NavigationBar
                 currentView={currentView}
-                setCurrentView={setCurrentView}
+                setCurrentView={(view) => {
+                    setCurrentView(view);
+                    if (view === 'create') {
+                        setSelectedSnippetId(null); // Deselect when entering create view
+                    }
+                }}
                 setServer={handleServerChange}
                 server={server}
             />
@@ -113,6 +118,7 @@ function App() {
                         searchQuery={searchQuery}
                         cachedSnippets={cachedSnippets}
                         refreshTrigger={refreshTrigger}
+                        currentView={currentView}
                     />
                 </div>
                 {currentView === 'view' ? (

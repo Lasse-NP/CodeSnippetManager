@@ -20,7 +20,7 @@
 #navigation #nav-buttons button {
     font-size: 1.8rem;
     font-weight: 400;
-    background-color: rgba(255,255,255,0.1);
+    background: linear-gradient(to right, rgba(102, 73, 60, 0.5), rgba(99, 58, 63, 0.5));
     max-width: fit-content;
     padding: 10px 20px;
     border-radius: 100px;
@@ -29,17 +29,17 @@
 }
 
     #navigation #nav-buttons button:hover {
-        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+        box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
     }
 
     #navigation #nav-buttons button:focus {
         outline: none;
-        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+        box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
     }
 
     #navigation #nav-buttons button:active {
         outline: none;
-        box-shadow: -1px -1px 0 2px #66493C, 1px 1px 0 2px #82455B;
+        box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
     }
 
 #dropdown-serverpicker-container {

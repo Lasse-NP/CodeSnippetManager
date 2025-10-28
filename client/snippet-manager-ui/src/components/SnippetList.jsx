@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetList.css';
 
-function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cachedSnippets, refreshTrigger }) {
+function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cachedSnippets, refreshTrigger, currentView }) {
     const [snippets, setSnippets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -82,7 +82,12 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
                 {filteredSnippets.length === 0 ? (<p>No snippets found</p>
                     ) : (
                     filteredSnippets.map(snippet => (
-                        <div key={snippet.id} id="snippet-item" className={`snippet-item ${selectedSnippetId === snippet.id ? 'selected' : ''}`} onClick={() => setSelectedSnippetId(snippet.id)}>
+                        <div key={snippet.id} id="snippet-item" className={`snippet-item ${selectedSnippetId === snippet.id ? 'selected' : ''} ${currentView === 'create' ? 'disabled' : ''}`}
+                            onClick={() => {
+                                if (currentView !== 'create') {
+                                    setSelectedSnippetId(snippet.id);
+                                }
+                            }}>
                             <h3>{snippet.title}</h3>
                             <p>{snippet.language}</p>
                         </div>
