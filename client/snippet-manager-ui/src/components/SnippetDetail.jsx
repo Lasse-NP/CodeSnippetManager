@@ -3,10 +3,12 @@ import { snippetsAPI } from '../api';
 import './SnippetDetail.css';
 
 function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
+    const previousSnippetId = useRef(null);
     const [snippet, setSnippet] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [prismLoaded, setPrismLoaded] = useState(false);
+    const [animationState, setAnimationState] = useState('idle');
     const codeRef = useRef(null);
 
     useEffect(() => {
@@ -51,19 +53,35 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
         if (selectedSnippetId) {
             const fetchSnippetDetails = async () => {
                 try {
-                    setLoading(true);
                     setError(null);
-                    const data = await snippetsAPI.getSnippetById(selectedSnippetId);
-                    setSnippet(data);
+                    // If there's a previous snippet and it's different, trigger exit animation
+                    if (previousSnippetId.current && previousSnippetId.current !== selectedSnippetId) {
+                        setAnimationState('exit');
+                        const fetchPromise = snippetsAPI.getSnippetById(selectedSnippetId);
+                        await new Promise(resolve => setTimeout(resolve, 500)); // Match CSS animation duration
+                        const data = await fetchPromise
+                        setSnippet(data);
+                    } else {
+                        // First load - no animation needed
+                        setLoading(true);
+                        const data = await snippetsAPI.getSnippetById(selectedSnippetId);
+                        setSnippet(data);
+                        setLoading(false);
+                    }
+                    previousSnippetId.current = selectedSnippetId;
+                    setAnimationState('enter');
+                    setTimeout(() => setAnimationState('idle'), 500);
                 } catch (err) {
                     setError('Failed to load snippet details.');
                     console.error('Error fetching snippet details:', err);
-                } finally {
                     setLoading(false);
                 }
             };
-
             fetchSnippetDetails();
+        } else {
+            // Reset when no snippet is selected
+            previousSnippetId.current = null;
+            setAnimationState('idle');
         }
     }, [selectedSnippetId]);
 
@@ -75,9 +93,10 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     }, [snippet, prismLoaded]);
 
     if (loading) {
+        // Insert text to display during loading
         return (
             <div className="loading" id="view-loading">
-                <p>Loading...</p>
+                <p></p>
             </div>
         );
     }
@@ -136,7 +155,8 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     };
 
     return (
-        <div className="body" id="snippet-view">
+        <div className="container" id="snippet-view-background">
+        <div className={`body ${animationState}`} id="snippet-view">
             <div className="attributes" id="view-attributes">
                 <div className="title" id="title-language">
                     <p className="badge" id="view-language-badge">{snippet.language}</p>
@@ -169,6 +189,7 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
                 <button id="delete-initiate-btn" onClick={handleDelete}>
                     Delete
                 </button>
+            </div>
             </div>
         </div>
     );

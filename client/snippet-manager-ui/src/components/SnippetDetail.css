@@ -1,11 +1,38 @@
 /* SnippetDetail.css */
-#snippet-view {
+#snippet-view-background {
     height: 100%;
+    width: 100%;
+    background-color: #271617;
     display: flex;
+    flex: 1;
+}
+
+#snippet-view {
+    display: flex;
+    position: relative;
     flex-direction: column;
     flex: 1;
-    background: linear-gradient(135deg, #5a3840, #472C2D, #3d2328);
+    background: linear-gradient(135deg, rgba(90, 56, 64, 0.1), rgba(71, 44, 45, 0.7), rgba(61, 35, 40, 0.4));
+    border: 6px solid rgba(61, 35, 40, 1);
+    border-radius: 100px;
+    margin: 20px;
+    box-shadow: 5px 5px 20px black;
+    overflow: hidden;
+    min-height: 0;
 }
+
+    #snippet-view.exit {
+        animation: slideOutRight 0.5s ease-in-out forwards;
+    }
+
+    #snippet-view.enter {
+        animation: slideInLeft 0.5s ease-in-out forwards;
+    }
+
+    #snippet-view.idle {
+        transform: translateX(0);
+        opacity: 1;
+    }
 
 #no-snippet-view, #view-loading, #view-pending {
     display: flex;
@@ -15,7 +42,7 @@
     font-size: 2.5rem;
     font-weight: bold;
     flex: 1;
-    background: linear-gradient(135deg, #5a3840, #472C2D, #3d2328);
+    background-color: #271617;
 }
 
 #view-error {
@@ -37,10 +64,10 @@
     margin-right: auto;
     width: 30vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
 }
 
     #view-attributes #title-language {
@@ -73,7 +100,8 @@
         font-size: 1.2rem;
         font-weight: 400;
         margin: 0;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
         text-align: center;
     }
 
@@ -95,10 +123,11 @@
 #view-code {
     flex: 1;
     position: relative;
-    background: linear-gradient(to right, #402828, #3D2622);
+    background: linear-gradient(135deg, rgba(64, 40, 40, 0.2), rgba(61, 38, 34, 0.8), rgba(64, 40, 40, 0.4));
+    border: 3px solid rgba(64, 40, 40, 1);
     opacity: 90%;
     color: white;
-    padding: 30px;
+    padding: 25px;
     margin-left: 10px;
     margin-right: 10px;
     overflow-y: auto;
@@ -110,7 +139,7 @@
     }
 
     #view-code::-webkit-scrollbar-track {
-        background: #3D2622;
+        background: #392320;
         border-radius: 20px;
         margin: 14px 0;
     }
@@ -125,15 +154,16 @@
         }
 
     #view-code pre {
+        min-height: 50px;
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 20px;
         overflow-x: auto;
         background-color: rgba(0, 0, 0, 0.2) !important;
     }
 
     #view-code code {
         font-family: 'Courier New', monospace;
-        font-size: 1rem;
+        font-size: 1.2rem;
         line-height: 1.5;
     }
 
@@ -177,3 +207,23 @@
         #view-buttons button:focus {
             outline: none;
         }
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(120%);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-120%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
