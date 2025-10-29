@@ -23,6 +23,7 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 // Register services
 builder.Services.AddScoped<ISnippetService, SnippetService>();
+builder.Services.AddScoped<ITagService, TagService>();
 
 // Configure CORS (for React frontend)
 builder.Services.AddCors(options =>

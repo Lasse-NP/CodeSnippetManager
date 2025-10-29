@@ -38,6 +38,11 @@ namespace CodeSnippetManager.Core.BusinessLogic
         public async Task<bool> DeleteSnippetAsync(int id)
         {
             bool result = await _snippetRepository.DeleteAsync(id);
+            if (result)
+            {
+                // Clean up orphaned tags after deleting snippet
+                await _tagRepository.DeleteOrphanedTagsAsync();
+            }
             return result;
         }
 
@@ -67,7 +72,7 @@ namespace CodeSnippetManager.Core.BusinessLogic
 
             MapToExistingEntity(snippet, dto);
 
-            if(dto.Tags != null)
+            if (dto.Tags != null)
             {
                 snippet.SnippetTags.Clear();
                 var tags = await _tagRepository.GetOrCreateTagsAsync(dto.Tags);
@@ -76,6 +81,7 @@ namespace CodeSnippetManager.Core.BusinessLogic
             }
 
             await _snippetRepository.UpdateAsync(snippet);
+            await _tagRepository.DeleteOrphanedTagsAsync();
             return MapToDTO(snippet);
         }
 

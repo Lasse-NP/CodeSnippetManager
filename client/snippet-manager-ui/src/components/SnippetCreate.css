@@ -9,8 +9,9 @@
     #snippet-create #create-title {
         text-align: center;
         margin-top: 15px;
+        margin-bottom: 0;
         padding: 10px;
-        font-size: 2rem;
+        font-size: 1.8vw;
         font-weight: 400;
     }
 
@@ -18,14 +19,14 @@
     margin-left: 30%;
     margin-right: 30%;
     text-align: center;
+    font-size: 1.1vw;
 }
 
-    #create-attributes input, #create-tags input {
-        font-size: 1.5rem;
+    #create-attributes input {
         background-color: #34201d;
         width: 100%;
         padding: 10px;
-        font-size: 1rem;
+        font-size: 1vw;
         border: solid 3px transparent;
         border-image: linear-gradient(to right, #66493C, #633A3F);
         border-image-slice: 1;
@@ -73,7 +74,7 @@
 
 #create-dropdown-arrow {
     margin-left: 10px;
-    font-size: 10px;
+    font-size: 0.8vw;
 }
 
 #create-dropdown-menu {
@@ -135,7 +136,7 @@
 }
 
     #create-code textarea {
-        font-size: 1.2rem;
+        font-size: 0.8vw;
         background-color: #34201d;
         width: 100%;
         padding: 10px;
@@ -163,7 +164,7 @@
 
     #create-buttons button {
         padding: 15px 40px;
-        font-size: 1.4rem;
+        font-size: 1.2vw;
         font-weight: 400;
         background: linear-gradient(to right, rgba(102, 73, 60, 1), rgba(99, 58, 63, 1));
         border: 3px solid #34201e;
@@ -181,15 +182,16 @@
             outline: none;
         }
 
+
 #create-attributes label, #create-code label, #create-tags label {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: 10px;
-    font-size: 1.4rem;
+    font-size: 1.1vw;
 }
 
-#create-attributes input:focus, #create-attributes ul:focus, #create-code textarea:focus, #create-tags input:focus {
+#create-attributes input:focus, #create-attributes ul:focus, #create-code textarea:focus {
     outline: none;
     box-shadow: 0 0 8px 4px #613C3F;
 }

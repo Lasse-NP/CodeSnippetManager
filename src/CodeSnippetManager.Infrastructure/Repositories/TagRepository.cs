@@ -35,19 +35,36 @@ namespace CodeSnippetManager.Infrastructure.Repositories
             return true;
         }
 
+        public async Task<int> DeleteOrphanedTagsAsync()
+        {
+            var orphanedTags = await _context.Tags
+                .Where(t => !t.SnippetTags.Any())
+                .ToListAsync();
+
+            var count = orphanedTags.Count;
+
+            if (orphanedTags.Any())
+            {
+                _context.Tags.RemoveRange(orphanedTags);
+                await _context.SaveChangesAsync();
+            }
+
+            return count;
+        }
+
         public async Task<IEnumerable<Tag>> GetAllAsync()
         {
-            return await _context.Tags.OrderBy(t => t.Name).ToListAsync();
+            return await _context.Tags.Include(t => t.SnippetTags).OrderBy(t => t.Name).ToListAsync();
         }
 
         public async Task<Tag?> GetByIdAsync(int id)
         {
-            return await _context.Tags.FindAsync(id);
+            return await _context.Tags.Include(t => t.SnippetTags).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<Tag?> GetByNameAsync(string name)
         {
-            return await _context.Tags.FirstOrDefaultAsync(t => t.Name == name);
+            return await _context.Tags.Include(t => t.SnippetTags).FirstOrDefaultAsync(t => t.Name == name);
         }
 
         public async Task UpdateAsync(Tag tag)

@@ -15,6 +15,7 @@ namespace CodeSnippetManager.Core.Interfaces
         Task<Tag> AddAsync(Tag tag);
         Task UpdateAsync(Tag tag);
         Task<bool> DeleteAsync(int id);
+        Task<int> DeleteOrphanedTagsAsync();
         Task<List<Tag>> GetOrCreateTagsAsync(List<string> tagNames);
     }
 }

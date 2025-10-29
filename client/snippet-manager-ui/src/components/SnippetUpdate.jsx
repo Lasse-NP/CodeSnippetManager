@@ -1,5 +1,6 @@
 ﻿import React, { useState, useRef, useEffect } from "react";
 import { snippetsAPI } from '../api';
+import TagInput from './TagInput';
 import './SnippetUpdate.css';
 
 export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel }) {
@@ -119,6 +120,11 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
         );
     }
 
+    const handleTagsChange = (newTags) => {
+        console.log('Parent received tags:', newTags);
+        setTags(newTags);
+    };
+
     return (
         <div className="body" id="snippet-update">
             <h2 id="update-title">Update Snippet</h2>
@@ -171,6 +177,16 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                         )}
                     </div>
                 </div>
+                <div className="tags" id="update-tags">
+                    <label>
+                        Tags:
+                    </label>
+                    <TagInput
+                        value={tags}
+                        onChange={handleTagsChange}
+                        placeholder="Type to add tags (press Space or Enter)"
+                    />
+                </div>
                 <div className="code" id="update-code">
                     <label>
                         Code:
@@ -178,17 +194,6 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                             value={code}
                             onChange={e => setCode(e.target.value)}
                             rows={10}
-                        />
-                    </label>
-                </div>
-                <div className="tags" id="update-tags">
-                    <label>
-                        Tags:
-                        <input
-                            type="text"
-                            value={tags}
-                            onChange={e => setTags(e.target.value)}
-                            placeholder="react, javascript, hooks"
                         />
                     </label>
                 </div>

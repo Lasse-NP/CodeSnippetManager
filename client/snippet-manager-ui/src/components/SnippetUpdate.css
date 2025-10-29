@@ -9,8 +9,9 @@
     #snippet-update #update-title {
         text-align: center;
         margin-top: 15px;
+        margin-bottom: 0px;
         padding: 10px;
-        font-size: 2rem;
+        font-size: 1.8vw;
         font-weight: 400;
     }
 
@@ -19,7 +20,7 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 2.5rem;
+    font-size: 2.5vw;
     font-weight: bold;
     flex: 1;
     background: linear-gradient(135deg, #3d2328, #472C2D, #5a3840);
@@ -30,21 +31,14 @@
     margin-left: 30%;
     margin-right: 30%;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.1vw;
 }
 
-    #update-attributes label {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    #snippet-update input {
-        font-size: 1.5rem;
+    #update-attributes input {
         background-color: #34201d;
         width: 100%;
         padding: 10px;
-        font-size: 1rem;
+        font-size: 1vw;
         border: solid 3px transparent;
         border-image: linear-gradient(to right, #66493C, #633A3F);
         border-image-slice: 1;
@@ -57,7 +51,7 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    margin: 5px;
+    margin-top: 5px;
 }
 
 #dropdown-lan-update-button {
@@ -92,7 +86,7 @@
 
 #update-dropdown-arrow {
     margin-left: 10px;
-    font-size: 10px;
+    font-size: 0.8vw;
 }
 
 #update-dropdown-menu {
@@ -149,15 +143,13 @@
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
-    font-size: 1.4rem;
 }
 
     #update-code textarea {
-        font-size: 1.2rem;
+        font-size: 0.8vw;
         background-color: #34201d;
         width: 100%;
         padding: 10px;
-        font-size: 1rem;
         border: solid 3px transparent;
         border-image: linear-gradient(to right, #66493C, #633A3F);
         border-image-slice: 1;
@@ -170,7 +162,6 @@
     margin-left: 25%;
     margin-right: 25%;
     text-align: center;
-    font-size: 1.4rem;
 }
 
 #update-buttons {
@@ -182,7 +173,7 @@
 
     #update-buttons button {
         padding: 15px 40px;
-        font-size: 1.4rem;
+        font-size: 1.2vw;
         font-weight: 400;
         background: linear-gradient(to right, rgba(102, 73, 60, 1), rgba(99, 58, 63, 1));
         border: 3px solid #34201e;
@@ -200,7 +191,15 @@
             outline: none;
         }
 
-#update-attributes input:focus, #update-attributes ul:focus, #update-code textarea:focus, #update-tags input:focus {
+#update-attributes label, #update-code label, #update-tags label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 1.1vw;
+}
+
+#update-attributes input:focus, #update-attributes ul:focus, #update-code textarea:focus {
     outline: none;
     box-shadow: 0 0 8px 4px #613C3F;
 }

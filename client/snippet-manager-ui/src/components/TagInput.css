@@ -1,0 +1,126 @@
+/* TagInput.css */
+
+#tags-input-container {
+    position: relative;
+    width: 100%;
+}
+
+#tag-input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background-color: #34201d;
+    border: solid 3px transparent;
+    border-image: linear-gradient(to right, #66493C, #633A3F);
+    border-image-slice: 1;
+    min-height: 42px;
+    cursor: text;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+}
+
+    #tag-input-wrapper:focus-within {
+        outline: none;
+        box-shadow: 0 0 8px 4px #613C3F;
+    }
+
+    #tag-input-wrapper span {
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+        gap: 6px;
+        padding: 6px 8px;
+        background: linear-gradient(to right, #66493C, #633A3F);
+        color: white;
+        border-radius: 16px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        white-space: nowrap;
+        border: 2px solid #34201e;
+    }
+
+    #tag-input-wrapper .tag-remove-btn {
+        background: none;
+        border: none;
+        border-radius: 16px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 2px 8px;
+        display: absolute;
+        transition: background-color 0.2s;
+    }
+
+        #tag-input-wrapper .tag-remove-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+#tag-input-field {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 6px;
+    font-size: 1rem;
+    min-width: 120px;
+    background: transparent;
+    color: white;
+}
+
+    #tag-input-field::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+#tag-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #34201e;
+    border: solid 3px #633A3F;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    scrollbar-width: thin;
+    scrollbar-color: #66493C #34201e;
+}
+
+    #tag-suggestions::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #tag-suggestions::-webkit-scrollbar-track {
+        background: #34201e;
+    }
+
+    #tag-suggestions::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        border-radius: 5px;
+    }
+
+        #tag-suggestions::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+        }
+
+.suggestion-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+    transition: background-color 0.15s ease;
+}
+
+    .suggestion-item:hover {
+        background-color: #673e3a;
+    }
+
+    .suggestion-item.selected {
+        background: linear-gradient(to right, #66493C, #633A3F);
+        font-weight: bold;
+    }

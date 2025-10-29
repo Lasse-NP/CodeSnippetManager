@@ -1,5 +1,6 @@
 ﻿import React, { useState, useRef, useEffect } from "react";
 import { snippetsAPI } from '../api';
+import TagInput from './TagInput';
 import './SnippetCreate.css';
 
 export default function SnippetCreate({ onCreate, onCancel }) {
@@ -75,6 +76,15 @@ export default function SnippetCreate({ onCreate, onCancel }) {
         }
     }
 
+    const handleTagsChange = (newTags) => {
+        console.log('Parent handleTagsChange called with:', newTags);
+        console.log('Current tags state:', tags);
+        console.log('Stack trace:', new Error().stack);
+        setTags(newTags);
+    };
+
+    console.log('SnippetCreate render - tags:', tags);
+
     return (
         <div className="body" id="snippet-create">
             <h2 id="create-title">Create New Snippet</h2>
@@ -127,6 +137,17 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                         )}
                     </div>
                 </div>
+                <div className="tags" id="create-tags">
+                    <label>
+                        Tags:
+                    </label>
+                    <TagInput
+                        key="tag-input-create"
+                        value={tags}
+                        onChange={handleTagsChange}
+                        placeholder="Type to add tags (press Space or Enter)"
+                    />
+                </div>
                 <div className="code" id="create-code">
                     <label>
                         Code:
@@ -134,17 +155,6 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                             value={code}
                             onChange={e => setCode(e.target.value)}
                             rows={10}
-                        />
-                    </label>
-                </div>
-                <div className="tags" id="create-tags">
-                    <label>
-                        Tags:
-                        <input
-                            type="text"
-                            value={tags}
-                            onChange={e => setTags(e.target.value)}
-                            placeholder="react, javascript, hooks"
                         />
                     </label>
                 </div>

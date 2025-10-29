@@ -80,3 +80,73 @@ export const snippetsAPI = {
         return response.json();
     },
 };
+
+export const TagsAPI = {
+    // Get all tags
+    getAllTags: async () => {
+        const response = await fetch(`${getBaseURL()}/tags`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch tags');
+        }
+        return response.json();
+    },
+
+    // Get tag by ID
+    getTagById: async (id) => {
+        const response = await fetch(`${getBaseURL()}/tags/byId/${id}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch tag ${id}`);
+        }
+        return response.json();
+    },
+
+    // Get tag by name
+    getTagByName: async (name) => {
+        const response = await fetch(`${getBaseURL()}/tags/byName/${encodeURIComponent(name)}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch tag ${name}`);
+        }
+        return response.json();
+    },
+
+    // Create a new tag
+    createTag: async (tagData) => {
+        const response = await fetch(`${getBaseURL()}/tags`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tagData),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to create tag');
+        }
+        return response.json();
+    },
+
+    // Update an existing tag
+    updateTag: async (id, tagData) => {
+        const response = await fetch(`${getBaseURL()}/tags/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tagData),
+        });
+        if (!response.ok) {
+            throw new Error(`Failed to update tag ${id}`);
+        }
+        return response.json();
+    },
+
+    // Delete a tag
+    deleteTag: async (id) => {
+        const response = await fetch(`${getBaseURL()}/tags/${id}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error(`Failed to delete tag ${id}`);
+        }
+        return response.status === 204;
+    },
+};
