@@ -28,7 +28,7 @@ In this project, I have set out to built a Code Snippet Manager, backed by an MS
 - [x] Finalize and Polish Design
 - [x] Enhance Visuals of Code
 - [x] Switch to Permanent Database Solution
-- [ ] Tag Auto-complete Functionality
+- [x] Tag Auto-complete Functionality
 - [ ] Add Custom Databases To Database List Functionality
 - [ ] First Downloadable Release
 
