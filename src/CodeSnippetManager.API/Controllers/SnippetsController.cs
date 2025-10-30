@@ -6,6 +6,7 @@ namespace CodeSnippetManager.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiKey]
     public class SnippetsController : ControllerBase
     {
         private readonly ISnippetService _snippetService;

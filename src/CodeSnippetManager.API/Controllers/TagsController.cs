@@ -6,6 +6,7 @@ namespace CodeSnippetManager.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ApiKey]
     public class TagsController : ControllerBase
     {
         private readonly ITagService _tagService;
