@@ -156,40 +156,40 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
 
     return (
         <div className="container" id="snippet-view-background">
-        <div className={`body ${animationState}`} id="snippet-view">
-            <div className="attributes" id="view-attributes">
-                <div className="title" id="title-language">
-                    <p className="badge" id="view-language-badge">{snippet.language}</p>
-                    <h2>{snippet.title}</h2>
+            <div className={`body ${animationState}`} id="snippet-view">
+                <div className="attributes" id="view-attributes">
+                    <div className="title" id="title-language">
+                        <p className="badge" id="view-language-badge">{snippet.language}</p>
+                        <h2>{snippet.title}</h2>
+                    </div>
+                    <h4>{snippet.description}</h4>
+                    <div className="tags" id="view-tags">
+                        {snippet.tags.slice(0, snippet.tags.length).map((tag, idx) => (
+                            <span key={idx} className="tag">
+                                {typeof tag === 'string' ? tag : tag.name}
+                            </span>
+                        ))}
+                    </div>
                 </div>
-                <h4>{snippet.description}</h4>
-                <div className="tags" id="view-tags">
-                    {snippet.tags.slice(0, snippet.tags.length).map((tag, idx) => (
-                        <span key={idx} className="tag">
-                            {typeof tag === 'string' ? tag : tag.name}
-                        </span>
-                    ))}
+                <div className="code" id="view-code">
+                    <pre>
+                        <code ref={codeRef} className={`language-${snippet?.language.toLowerCase() || 'javascript'}`}>
+                            {snippet.code}
+                        </code>
+                        <svg id="copy-button" fill="#000000" width="50px" height="50px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" onClick={copyToClipboard}>
+                            <path fill="white" d="M0 1919.887h1467.88V452.008H0v1467.88ZM1354.965 564.922v1242.051H112.914V564.922h1242.051ZM1920 0v1467.992h-338.741v-113.027h225.827V112.914H565.035V338.74H452.008V0H1920ZM338.741 1016.93h790.397V904.016H338.74v112.914Zm0 451.062h790.397v-113.027H338.74v113.027Zm0-225.588h564.57v-112.913H338.74v112.913Z" fill-rule="evenodd" />
+                        </svg>
+                    </pre>
                 </div>
-            </div>
-            <div className="code" id="view-code">
-                <pre>
-                    <code ref={codeRef} className={`language-${snippet?.language.toLowerCase() || 'javascript'}`}>
-                        {snippet.code}
-                    </code>
-                    <svg id="copy-button" fill="#000000" width="50px" height="50px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" onClick={copyToClipboard}>
-                        <path fill="white" d="M0 1919.887h1467.88V452.008H0v1467.88ZM1354.965 564.922v1242.051H112.914V564.922h1242.051ZM1920 0v1467.992h-338.741v-113.027h225.827V112.914H565.035V338.74H452.008V0H1920ZM338.741 1016.93h790.397V904.016H338.74v112.914Zm0 451.062h790.397v-113.027H338.74v113.027Zm0-225.588h564.57v-112.913H338.74v112.913Z" fill-rule="evenodd" />
-                    </svg>
-                </pre>
-            </div>
 
-            <div className="button-group" id="view-buttons">
-                <button id="update-initiate-btn" onClick={handleUpdate}>
-                    Update
-                </button>
-                <button id="delete-initiate-btn" onClick={handleDelete}>
-                    Delete
-                </button>
-            </div>
+                <div className="button-group" id="view-buttons">
+                    <button id="update-initiate-btn" onClick={handleUpdate}>
+                        Update
+                    </button>
+                    <button id="delete-initiate-btn" onClick={handleDelete}>
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
     );

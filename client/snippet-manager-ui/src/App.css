@@ -14,8 +14,39 @@ html, body {
 }
 
 body {
+    background: linear-gradient(135deg, #0f0508 0%, #1a0d12 100%);
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
+    body:before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        bottom: -300px;
+        left: 0px;
+        background: radial-gradient(circle, rgba(172, 71, 61, 0.4) 0%, transparent 90%);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        animation: morph 20s ease-in-out infinite reverse, rotateClockwise 30s linear infinite;
+        z-index: 0;
+        opacity: 50%;
+        filter: blur(150px);
+    }
+
+#bottom-right-gear {
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(2px);
+    bottom: -500px;
+    left: -200px;
+    animation: rotateClockwise 30s linear infinite;
+    isolation: isolate;
+}
+
+
 
 .App {
     height: 100vh;
@@ -41,10 +72,10 @@ body {
 .sidebar {
     width: 300px;
     flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    background: linear-gradient(to right, #31231d, #301c20);
+    display: grid; /* Change from flex to grid */
+    grid-template-rows: auto 1fr; /* SearchBar takes auto height, SnippetList fills rest */
+    overflow: hidden; /* Move overflow control to children */
+    position: relative;
 }
 
 .create-view,
@@ -55,4 +86,54 @@ body {
     flex-direction: column;
     overflow: hidden;
     min-width: 0;
+}
+
+@keyframes rotateClockwise {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gearStuck {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(5deg);
+    }
+
+    40% {
+        transform: rotate(-4deg);
+    }
+
+    60% {
+        transform: rotate(3deg);
+    }
+
+    80% {
+        transform: rotate(-2deg);
+    }
+}
+
+@keyframes morph {
+    0%, 100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    25% {
+        border-radius: 60% 40% 50% 50% / 30% 60% 40% 70%;
+    }
+
+    50% {
+        border-radius: 50% 50% 30% 70% / 50% 50% 70% 30%;
+    }
+
+    75% {
+        border-radius: 70% 30% 50% 50% / 40% 70% 30% 60%;
+    }
 }

@@ -75,10 +75,20 @@ function NavigationBar({ currentView, setCurrentView, setServer, server }) {
                 </button>
                 {isDropdownOpen && (
                     <ul className="dropdown-menu" id="serverpicker-dropdown-menu" ref={dropdownRef}>
-                        <li className="server" id="remote-server" onClick={() => { setServer("Remote"); setIsDropdownOpen(false);}}
+                        <li className="server" id="remote-server" onClick={() => { setServer("Remote"); setIsDropdownOpen(false); }}
                         >Remote</li>
                         <li className="server" id="local-server" onClick={() => { setServer("Local"); setIsDropdownOpen(false); }}
                         >Local</li>
+                        <li className="button-row" id="serverpicker-buttons-row">
+                            <span className="button-group" id="serverpicker-buttons">
+                                <button className="button" id="add-server-btn" onClick={() => alert('Add Server functionality not implemented yet.')}>
+                                    Add
+                                </button>
+                                <button className="button" id="remove-server-btn" onClick={() => alert('Remove Server functionality not implemented yet.')}>
+                                    Del
+                                </button>
+                            </span>
+                        </li>
                     </ul>
                 )}
             </div>

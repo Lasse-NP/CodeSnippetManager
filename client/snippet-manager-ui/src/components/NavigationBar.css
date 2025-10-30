@@ -1,7 +1,8 @@
 /* NavigationBar.css */
 #navigation {
-    background-color: #251515;
-    background: linear-gradient(to bottom, #492e34 1%, #3d2328);
+    background: linear-gradient(360deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.2));
+    border-bottom: 5px solid rgba(199, 75, 53, 0.01);
+    backdrop-filter: blur(10px);
     color: white;
     padding: 20px;
     display: flex;
@@ -9,38 +10,88 @@
     align-items: center;
     position: relative;
     width: 100%;
+    z-index: 100;
 }
 
+    #navigation svg {
+        fill: white;
+        width: 80px;
+        height: auto;
+        position: absolute;
+        left: 44px;
+        top: 15px;
+        opacity: 75%;
+        cursor: pointer;
+        transition: filter 0.5s ease;
+    }
+
+        #navigation svg:hover {
+            filter: drop-shadow(0px 4px 15px #c76f47);
+        }
+
 #nav-buttons {
-    margin-left: 120px;
+    margin-left: 140px;
     display: flex;
     gap: 20px;
 }
 
 #navigation #nav-buttons button {
     font-size: 1.8rem;
+    position: relative;
     font-weight: 400;
-    background: linear-gradient(to right, rgba(102, 73, 60, 0.5), rgba(99, 58, 63, 0.5));
+    background: linear-gradient(rgba(58, 21, 29, 0.3), rgba(76, 28, 27, 0.4)), linear-gradient(#ffc0c6 30%, rgba(144, 52, 77, 0.1) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+    border: 4px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box, border-box;
+    background-size: 200%;
     max-width: fit-content;
     padding: 10px 20px;
     border-radius: 100px;
-    border: 3px solid transparent;
-    transition: box-shadow 0.5s ease;
+    animation: animate 2s infinite linear;
 }
 
-    #navigation #nav-buttons button:hover {
-        box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
+    #navigation #nav-buttons button::before {
+        content: '';
+        background: linear-gradient(90deg, #c74b35, #c13941, #c13967, #d1497c, #c13967, #c13941, #c74b35);
+        height: 80%;
+        width: 105%;
+        position: absolute;
+        left: -2%;
+        bottom: -3%;
+        z-index: -1;
+        background-size: 200%;
+        animation: animate 2s infinite linear;
+        transition: opacity 0.8s ease;
+        filter: blur(30px);
+        opacity: 40%;
     }
+
+    #navigation #nav-buttons button:hover {
+        animation: animate 0.5s infinite linear;
+    }
+
+        #navigation #nav-buttons button:hover::before {
+            animation: animate 0.5s infinite linear;
+            opacity: 80%;
+        }
 
     #navigation #nav-buttons button:focus {
         outline: none;
-        box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
     }
+
+        #navigation #nav-buttons button:focus::before {
+            animation: animate 0.5s infinite linear;
+            opacity: 80%;
+        }
 
     #navigation #nav-buttons button:active {
         outline: none;
-        box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
     }
+
+        #navigation #nav-buttons button:active::before {
+            animation: animate 0.5s infinite linear;
+            opacity: 80%;
+        }
 
 #dropdown-serverpicker-container {
     display: flex;
@@ -50,32 +101,64 @@
     margin-right: 40px;
 }
 
+
+
 #dropdown-serverpicker-button {
     padding: 6px 6px;
-    border: solid 4px;
-    border-color: #34201e;
-    border-radius: 4px;
-    background: linear-gradient(to right, #66493C, #633A3F);
+    position: relative;
+    background: linear-gradient(rgba(58, 21, 29, 0.3), rgba(76, 28, 27, 0.4)), linear-gradient(#ffc0c6 30%, rgba(144, 52, 77, 0.1) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+    border: 4px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box, border-box;
+    background-size: 200%;
     cursor: pointer;
     display: flex;
-    width: 100px;
-    height: 60px;
+    width: 140px;
+    height: 50px;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: inherit;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: animate 2s infinite linear;
+    z-index: 101;
 }
 
-    #dropdown-serverpicker-button:hover {
-        border-color: #633A3F;
-        box-shadow: 0 0 8px 4px #613C3F;
+    #dropdown-serverpicker-button::before {
+        content: '';
+        background: linear-gradient(90deg, #c74b35, #c13941, #c13967, #d1497c, #c13967, #c13941, #c74b35);
+        height: 80%;
+        width: 105%;
+        position: absolute;
+        left: -4%;
+        bottom: -3%;
+        z-index: -1;
+        background-size: 200%;
+        animation: animate 2s infinite linear;
+        transition: opacity 0.8s ease, filter 0.3s ease;
+        filter: blur(30px);
+        opacity: 40%;
     }
 
-    #dropdown-serverpicker-button.dropdown-open {
-        border-color: #633A3F;
-        box-shadow: 0 0 8px 4px #613C3F;
+    #dropdown-serverpicker-button:hover {
+        animation: animate 0.5s infinite linear;
     }
+
+        #dropdown-serverpicker-button:hover::before {
+            animation: animate 0.5s infinite linear;
+            opacity: 90%;
+        }
+
+    #dropdown-serverpicker-button.dropdown-open {
+        animation: animate 0.5s infinite linear;
+    }
+
+        #dropdown-serverpicker-button.dropdown-open::before {
+            animation: animate 0.5s infinite linear, glowExpand 0.3s ease-out forwards;
+            opacity: 70%;
+            height: 350%;
+            bottom: -300%;
+            filter: blur(50px);
+        }
 
     #dropdown-serverpicker-button:focus {
         outline: none;
@@ -89,66 +172,148 @@
 #serverpicker-dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0%;
+    left: 3%;
     right: 0;
-    width: 100%;
+    width: 90%;
     margin: 0;
     padding: 0;
     list-style: none;
     border: solid 3px;
-    border-color: #633A3F;
-    background: #34201e;
+    border-top: transparent 3px;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    animation: rotateMenu 0.6s ease-in-out forwards;
+    transform-origin: top center;
 }
 
     #serverpicker-dropdown-menu li {
         padding: 10px 12px;
         cursor: pointer;
+        position: relative;
+        text-align: center;
         transition: background-color 0.1s ease;
     }
 
-        #serverpicker-dropdown-menu li:hover {
-            background-color: #673e3a;
-        }
-
-        #serverpicker-dropdown-menu li.selected {
-            background-image: linear-gradient(to right, #66493C, #633A3F);
-            font-weight: bold;
-        }
-
-    #serverpicker-dropdown-menu::-webkit-scrollbar {
-        width: 6px;
+    #serverpicker-dropdown-menu .server::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+        background-size: 200%;
+        opacity: 0;
+        filter: blur(10px);
+        animation: animate 1s infinite linear;
+        transition: opacity 0.5s ease;
+        z-index: -1;
     }
 
-    #serverpicker-dropdown-menu::-webkit-scrollbar-track {
-        background: #34201e;
+    #serverpicker-dropdown-menu .server:hover {
+        background-color: rgba(255, 255, 255, 0.2);
     }
 
-    #serverpicker-dropdown-menu::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
-        border-radius: 5px;
+    #serverpicker-dropdown-menu .server:hover::before {
+        opacity: 1;
     }
 
-        #serverpicker-dropdown-menu::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+    #serverpicker-dropdown-menu .server.selected {
+        background-image: linear-gradient(to right, #66493C, #633A3F);
+        font-weight: bold;
+    }
+
+    #serverpicker-dropdown-menu #serverpicker-buttons-row {
+        padding: 0px 0px;
+    }
+
+        #serverpicker-dropdown-menu #serverpicker-buttons-row:hover {
+            background-color: none;
         }
 
+    #serverpicker-dropdown-menu #serverpicker-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+    }
 
-#navigation svg {
-    fill: white;
-    width: 80px;
-    height: auto;
-    position: absolute;
-    left: 32px;
-    top: 15px;
-    opacity: 75%;
+#serverpicker-dropdown-menu #serverpicker-buttons button {
+    width: 50%;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 0px;
+    border-radius: 0px;
     cursor: pointer;
-    transition: filter 0.5s ease;
+    transition: background-color 0.3s ease;
 }
 
-    #navigation svg:hover {
-        filter: drop-shadow(0px 4px 15px #c76f47);
+    #serverpicker-dropdown-menu #serverpicker-buttons button:hover {
+        border: 0px;
+        background-color: rgba(255, 255, 255, 0.4);
     }
+
+    #serverpicker-dropdown-menu #serverpicker-buttons button:focus {
+        outline: none;
+    }
+
+#serverpicker-dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+#serverpicker-dropdown-menu::-webkit-scrollbar-track {
+    background: #34201e;
+}
+
+#serverpicker-dropdown-menu::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+    border-radius: 5px;
+}
+
+    #serverpicker-dropdown-menu::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #8a6450, #8a4c52);
+    }
+
+
+@keyframes animate {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+@keyframes rotateMenu {
+    0% {
+        transform: rotateX(-90deg)
+    }
+
+    70% {
+        transform: rotateX(20deg)
+    }
+
+    100% {
+        transform: rotateX(0deg)
+    }
+}
+
+@keyframes glowExpand {
+    from {
+        height: 80%;
+        bottom: -3%;
+        opacity: 20%;
+        filter: blur(30px);
+    }
+
+    to {
+        height: 350%;
+        bottom: -300%;
+        opacity: 70%;
+        filter: blur(50px);
+    }
+}

@@ -2,8 +2,10 @@
 #snippet-view-background {
     height: 100%;
     width: 100%;
-    background-color: #271617;
     display: flex;
+    background-color: rgba(130, 25, 13, 0.05);
+    backdrop-filter: blur(5px);
+    transition: backdrop-filter 3s ease;
     flex: 1;
 }
 
@@ -12,8 +14,9 @@
     position: relative;
     flex-direction: column;
     flex: 1;
-    background: linear-gradient(135deg, rgba(90, 56, 64, 0.1), rgba(71, 44, 45, 0.7), rgba(61, 35, 40, 0.4));
-    border: 6px solid rgba(61, 35, 40, 1);
+    background: linear-gradient(135deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.15));
+    backdrop-filter: blur(10px);
+    border: 6px solid rgba(199, 75, 53, 0.1);
     border-radius: 100px;
     margin: 20px;
     box-shadow: 5px 5px 20px black;
@@ -22,7 +25,7 @@
 }
 
     #snippet-view.exit {
-        animation: slideOutRight 0.5s ease-in-out forwards;
+        animation: slideOutLeft 0.5s ease-in-out forwards;
     }
 
     #snippet-view.enter {
@@ -42,7 +45,8 @@
     font-size: 2.5rem;
     font-weight: bold;
     flex: 1;
-    background-color: #271617;
+    background-color: rgba(130, 25, 13, 0.05);
+    backdrop-filter: blur(2px);
 }
 
 #view-error {
@@ -53,7 +57,8 @@
     font-size: 1rem;
     font-family: 'Courier New', monospace;
     flex: 1;
-    background: linear-gradient(135deg, #5a3840, #472C2D, #3d2328);
+    background-color: rgba(130, 25, 13, 0.05);
+    backdrop-filter: blur(10px);
 }
 
 #view-attributes {
@@ -79,20 +84,20 @@
 
         #view-attributes #title-language #view-language-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #66493C, #633A3F);
+            background: linear-gradient(135deg, rgba(199, 75, 53, 0.6), rgba(209, 73, 124, 0.6));
             padding: 8px 20px;
             border-radius: 20px;
-            font-size: 2.5rem;
+            font-size: 2.1vw;
             font-weight: 500;
             letter-spacing: 2px;
             margin: 10px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 8px rgba(199, 75, 53, 0.3), 1px 0 8px rgba(209, 73, 124, 0.3);
         }
 
     #view-attributes h2 {
         text-align: center;
         margin: 0;
-        font-size: 2rem;
+        font-size: 1.7vw;
         font-weight: 500;
     }
 
@@ -113,7 +118,7 @@
 }
 
     #view-tags span {
-        background-color: rgba(255, 255, 255, 0.2);
+        background: linear-gradient(135deg, rgba(199, 75, 53, 0.3), rgba(209, 73, 124, 0.3));
         padding: 4px 10px;
         border-radius: 12px;
         font-size: 0.72rem;
@@ -123,8 +128,9 @@
 #view-code {
     flex: 1;
     position: relative;
-    background: linear-gradient(135deg, rgba(64, 40, 40, 0.2), rgba(61, 38, 34, 0.8), rgba(64, 40, 40, 0.4));
-    border: 3px solid rgba(64, 40, 40, 1);
+    background: linear-gradient(135deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.1));
+    border: 3px solid rgba(199, 75, 53, 0.2);
+    backdrop-filter: blur(10px);
     opacity: 90%;
     color: white;
     padding: 25px;
@@ -190,31 +196,55 @@
 
     #view-buttons button {
         padding: 15px 40px;
+        position: relative;
         font-size: 1.4rem;
         font-weight: 400;
-        background: linear-gradient(to right, rgba(102, 73, 60, 1), rgba(99, 58, 63, 1));
-        border: 3px solid #34201e;
-        border-radius: 4px;
+        background: linear-gradient(rgba(58, 21, 29, 0.3), rgba(76, 28, 27, 0.4)), linear-gradient(#ffc0c6 30%, rgba(144, 52, 77, 0.1) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+        border: 5px solid transparent;
+        background-origin: border-box;
+        background-clip: padding-box, border-box, border-box;
+        background-size: 200%;
+        border-radius: 100px;
         cursor: pointer;
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        animation: animate 2s infinite linear;
     }
 
-        #view-buttons button:hover {
-            border-color: transparent;
-            box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
+        #view-buttons button::before {
+            content: '';
+            background: linear-gradient(90deg, #c74b35, #c13941, #c13967, #d1497c, #c13967, #c13941, #c74b35);
+            opacity: 25%;
+            height: 80%;
+            width: 105%;
+            position: absolute;
+            left: -2%;
+            bottom: -5%;
+            z-index: -1;
+            background-size: 200%;
+            animation: animate 2s infinite linear;
+            transition: opacity 0.8s ease;
+            filter: blur(30px);
         }
+
+        #view-buttons button:hover {
+            animation: animate 0.5s infinite linear;
+        }
+
+            #view-buttons button:hover::before {
+                animation: animate 0.5s infinite linear;
+                opacity: 90%;
+            }
 
         #view-buttons button:focus {
             outline: none;
         }
 
-@keyframes slideOutRight {
+@keyframes slideOutLeft {
     from {
         transform: translateX(0);
     }
 
     to {
-        transform: translateX(120%);
+        transform: translateX(-120%);
     }
 }
 
@@ -225,5 +255,15 @@
 
     to {
         transform: translateX(0);
+    }
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
     }
 }

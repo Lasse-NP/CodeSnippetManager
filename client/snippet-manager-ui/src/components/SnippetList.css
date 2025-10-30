@@ -1,14 +1,17 @@
 #snippet-list {
-    flex: 1;
-    padding: 20px;
-    margin-top: 20px;
-    border-start-start-radius: 30px;
-    border-start-end-radius: 30px;
+    padding-right: 30px;
+    padding-left: 10px;
+    padding-top: 125px; /* Remove top padding since it starts under SearchBar */
+    padding-bottom: 10px;
     color: white;
-    overflow-y: auto;
+    overflow-y: auto; /* Scrolling happens here */
     display: flex;
     flex-direction: column;
-    background-color: #2c1c1c;
+    background: linear-gradient(90deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.1));
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    margin-top: -115px; /* Negative margin to overlap under SearchBar */
 }
 
     #snippet-list::-webkit-scrollbar {
@@ -16,18 +19,16 @@
     }
 
     #snippet-list::-webkit-scrollbar-track {
-        background: #3D2622;
-        border-radius: 20px;
-        margin: 25px 0 0 0;
+        background: rgba(61, 38, 34, 0.5);
+        margin: 115px 0 0 0;
     }
 
     #snippet-list::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #694d40, #62383c);
-        border-radius: 5px;
+        background: linear-gradient(to bottom, rgba(199, 75, 53, 0.3), rgba(209, 73, 124, 0.3));
     }
 
         #snippet-list::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+            background: linear-gradient(to bottom, rgba(199, 75, 53, 0.7), rgba(209, 73, 124, 0.7));
         }
 
 #list-loading {
@@ -55,24 +56,27 @@
 #snippet-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
     #snippet-container #snippet-item {
-        background: linear-gradient(to right, #422F27, #42272C);
+        background: linear-gradient(135deg, rgba(199, 75, 53, 0.2), rgba(209, 73, 124, 0.15));
+        backdrop-filter: blur(10px);
         padding: 15px;
-        border-radius: 6px;
+        border-radius: 12px;
         cursor: pointer;
-        border: 3px solid transparent;
-        transition: box-shadow 0.5s ease;
+        border: 2px solid rgba(199, 75, 53, 0.1);
+        transition: transform 0.2s, background-color 0.3s;
     }
 
         #snippet-container #snippet-item:hover {
-            box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
+            transform: translateX(5px);
+            background-color: rgba(209, 73, 124, 0.2);
         }
 
         #snippet-container #snippet-item.selected {
-            box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
+            transform: translateX(15px);
+            background-color: rgba(209, 73, 124, 0.2);
         }
 
         #snippet-container #snippet-item.disabled {
