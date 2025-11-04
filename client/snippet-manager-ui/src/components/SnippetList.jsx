@@ -89,7 +89,7 @@ function SnippetList({ selectedSnippetId, setSelectedSnippetId, searchQuery, cac
                                 }
                             }}>
                             <h3>{snippet.title}</h3>
-                            <p>{snippet.language}</p>
+                            <p id="snippet-item-language-badge">{snippet.language}</p>
                         </div>
                     ))
                 )}

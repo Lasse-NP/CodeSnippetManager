@@ -153,11 +153,7 @@
     }
 
         #dropdown-serverpicker-button.dropdown-open::before {
-            animation: animate 0.5s infinite linear, glowExpand 0.3s ease-out forwards;
-            opacity: 70%;
-            height: 350%;
-            bottom: -300%;
-            filter: blur(50px);
+            animation: animate 0.5s infinite linear, glowExpandServers 0.3s ease-out forwards;
         }
 
     #dropdown-serverpicker-button:focus {
@@ -172,8 +168,8 @@
 #serverpicker-dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 3%;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 90%;
     margin: 0;
     padding: 0;
@@ -302,7 +298,7 @@
     }
 }
 
-@keyframes glowExpand {
+@keyframes glowExpandServers {
     from {
         height: 80%;
         bottom: -3%;

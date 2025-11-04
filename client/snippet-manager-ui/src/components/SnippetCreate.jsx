@@ -151,11 +151,14 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                 <div className="code" id="create-code">
                     <label>
                         Code:
-                        <textarea
-                            value={code}
-                            onChange={e => setCode(e.target.value)}
-                            rows={10}
-                        />
+                        <div className="textarea-wrapper">
+                            <textarea
+                                id="code-area-create"
+                                value={code}
+                                onChange={e => setCode(e.target.value)}
+                                rows={10}
+                            />
+                        </div>
                     </label>
                 </div>
                 <div className="button-group" id="create-buttons">

@@ -10,10 +10,9 @@
     flex-wrap: wrap;
     gap: 6px;
     padding: 10px;
-    background-color: #34201d;
-    border: solid 3px transparent;
-    border-image: linear-gradient(to right, #66493C, #633A3F);
-    border-image-slice: 1;
+    background: linear-gradient(135deg, rgba(199, 75, 53, 0.4), rgba(209, 73, 124, 0.4));
+    border: 2px solid rgba(199, 75, 53, 0.4);
+    border-radius: 100px;
     min-height: 42px;
     cursor: text;
     align-items: center;

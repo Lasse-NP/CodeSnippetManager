@@ -63,10 +63,12 @@
         background: linear-gradient(135deg, rgba(199, 75, 53, 0.2), rgba(209, 73, 124, 0.15));
         backdrop-filter: blur(10px);
         padding: 15px;
+        padding-bottom: 50px;
         border-radius: 12px;
         cursor: pointer;
         border: 2px solid rgba(199, 75, 53, 0.1);
         transition: transform 0.2s, background-color 0.3s;
+        position: relative;
     }
 
         #snippet-container #snippet-item:hover {
@@ -93,7 +95,17 @@
             font-size: 1rem;
         }
 
-        #snippet-container #snippet-item p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
+#snippet-item #snippet-item-language-badge {
+    display: inline-block;
+    position: absolute;
+    bottom: -6px;
+    right: 20px;
+    background: linear-gradient(135deg, rgba(199, 75, 53, 0.6), rgba(209, 73, 124, 0.6));
+    padding: 4px 10px;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 5px 0;
+    box-shadow: 0 1px 8px rgba(199, 75, 53, 0.3), 1px 0 8px rgba(209, 73, 124, 0.3);
+}
