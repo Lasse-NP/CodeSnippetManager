@@ -1,15 +1,29 @@
 #snippet-update {
-    background: linear-gradient(135deg, #271617, #281517, #301819);
+    position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
     flex: 1;
+    z-index: 0;
+    isolation: isolate;
 }
+
+    #snippet-update::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(135deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.15));
+        z-index: -1;
+        opacity: 0.6;
+    }
 
     #snippet-update #update-title {
         text-align: center;
         margin-top: 15px;
-        margin-bottom: 0px;
+        margin-bottom: 0;
         padding: 10px;
         font-size: 1.8vw;
         font-weight: 400;
@@ -31,17 +45,16 @@
     margin-left: 30%;
     margin-right: 30%;
     text-align: center;
-    font-size: 1.1vw;
 }
 
     #update-attributes input {
-        background-color: #34201d;
+        background: linear-gradient(135deg, rgba(199, 75, 53, 0.3), rgba(209, 73, 124, 0.3));
+        backdrop-filter: blur(3px);
         width: 100%;
         padding: 10px;
         font-size: 1vw;
-        border: solid 3px transparent;
-        border-image: linear-gradient(to right, #66493C, #633A3F);
-        border-image-slice: 1;
+        border: 2px solid rgba(199, 75, 53, 0.4);
+        border-radius: 100px;
         transition: box-shadow 0.3s ease;
     }
 
@@ -56,29 +69,58 @@
 
 #dropdown-lan-update-button {
     padding: 6px 6px;
-    border: solid 4px;
-    border-color: #34201e;
-    border-radius: 4px;
-    background: linear-gradient(to right, #66493C, #633A3F);
+    position: relative;
+    background: linear-gradient(rgba(58, 21, 29, 0.3), rgba(76, 28, 27, 0.4)), linear-gradient(#ffc0c6 30%, rgba(144, 52, 77, 0.1) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+    border: 4px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box, border-box;
+    background-size: 200%;
     cursor: pointer;
     display: flex;
-    width: 40%;
+    width: 16rem;
+    min-width: 12rem;
+    height: 3rem;
+    min-height: 2.5rem;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: inherit;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: animate 2s infinite linear;
+    z-index: 101;
 }
 
-    #dropdown-lan-update-button:hover {
-        border-color: #633A3F;
-        box-shadow: 0 0 8px 4px #613C3F;
+    #dropdown-lan-update-button::before {
+        content: '';
+        background: linear-gradient(90deg, #c74b35, #c13941, #c13967, #d1497c, #c13967, #c13941, #c74b35);
+        height: 80%;
+        width: 105%;
+        position: absolute;
+        left: -4%;
+        bottom: -3%;
+        z-index: -1;
+        background-size: 200%;
+        animation: animate 2s infinite linear;
+        transition: opacity 0.8s ease, filter 0.3s ease;
+        filter: blur(30px);
+        opacity: 40%;
     }
 
-    #dropdown-lan-update-button.dropdown-open {
-        border-color: #633A3F;
-        box-shadow: 0 0 8px 4px #613C3F;
+    #dropdown-lan-update-button:hover {
+        animation: animate 0.5s infinite linear;
     }
+
+        #dropdown-lan-update-button:hover::before {
+            animation: animate 0.5s infinite linear;
+            opacity: 90%;
+        }
+
+    #dropdown-lan-update-button.dropdown-open {
+        animation: animate 0.5s infinite linear;
+    }
+
+        #dropdown-lan-update-button.dropdown-open::before {
+            animation: animate 0.5s infinite linear, glowExpandCreate 0.3s ease-out forwards;
+        }
 
     #dropdown-lan-update-button:focus {
         outline: none;
@@ -86,40 +128,69 @@
 
 #update-dropdown-arrow {
     margin-left: 10px;
-    font-size: 0.8vw;
+    font-size: 0.5vw;
 }
 
 #update-dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 30%;
-    right: 0;
-    width: 39%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15rem;
     margin: 0;
     padding: 0;
     list-style: none;
     border: solid 3px;
-    border-color: #633A3F;
-    background: #34201e;
+    border-top: transparent 3px;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5));
+    backdrop-filter: blur(3px);
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    animation: rotateMenu 0.6s ease-in-out forwards;
+    transform-origin: top center;
 }
 
     #update-dropdown-menu li {
         padding: 10px 12px;
         cursor: pointer;
+        position: relative;
+        text-align: center;
+        color: white;
+        text-shadow: 1px 1px black;
         transition: background-color 0.1s ease;
     }
 
-        #update-dropdown-menu li:hover {
-            background-color: #673e3a;
+        #update-dropdown-menu li::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background: linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+            background-size: 200%;
+            opacity: 0;
+            filter: blur(10px);
+            animation: animate 1s infinite linear;
+            transition: opacity 0.5s ease;
+            z-index: -1;
         }
 
+        #update-dropdown-menu li:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+            #update-dropdown-menu li:hover::before {
+                opacity: 1;
+            }
+
         #update-dropdown-menu li.selected {
-            background-image: linear-gradient(to right, #66493C, #633A3F);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(199, 75, 53, 0.6), rgba(209, 73, 124, 0.6), rgba(255, 255, 255, 0));
             font-weight: bold;
+            text-shadow: 2px 2px black;
         }
 
     #update-dropdown-menu::-webkit-scrollbar, textarea::-webkit-scrollbar {
@@ -127,35 +198,59 @@
     }
 
     #update-dropdown-menu::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track {
-        background: #34201e;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
     }
 
     #update-dropdown-menu::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.5));
         border-radius: 5px;
     }
 
         #update-dropdown-menu::-webkit-scrollbar-thumb:hover, textarea::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));
         }
 
 #update-code {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
     text-align: center;
 }
 
-    #update-code textarea {
-        font-size: 0.8vw;
-        background-color: #34201d;
+    #update-code #textarea-wrapper-update {
+        position: relative;
         width: 100%;
-        padding: 10px;
-        border: solid 3px transparent;
-        border-image: linear-gradient(to right, #66493C, #633A3F);
-        border-image-slice: 1;
+        height: 10vw;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, rgba(199, 75, 53, 0.4), rgba(209, 73, 124, 0.4));
+        backdrop-filter: blur(3px);
+        border: 2px solid rgba(199, 75, 53, 0.4);
+        border-radius: 15px;
         transition: box-shadow 0.3s ease;
-        scrollbar-width: thin;
-        scrollbar-color: #66493C #34201e;
+    }
+
+        #update-code #textarea-wrapper-update:focus-within {
+            outline: none;
+            box-shadow: 0 0 8px 4px rgba(199, 75, 53, 0.4);
+        }
+
+    #update-code textarea {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        padding: 10px 20px;
+        font-family: 'Courier New', monospace;
+        font-size: 1rem;
+        background: transparent;
+        border: none;
+        outline: none;
+        resize: none;
+        overflow: visible;
+    }
+
+    #update-code #textarea-wrapper-update::-webkit-scrollbar {
+        width: 0px;
     }
 
 #update-tags {
@@ -165,27 +260,51 @@
 }
 
 #update-buttons {
+    padding: 30px;
     display: flex;
+    gap: 20px;
     justify-content: center;
-    margin: 40px;
-    gap: 20px; /* Space between buttons */
 }
 
     #update-buttons button {
         padding: 15px 40px;
-        font-size: 1.2vw;
+        position: relative;
+        font-size: 1.4vw;
         font-weight: 400;
-        background: linear-gradient(to right, rgba(102, 73, 60, 1), rgba(99, 58, 63, 1));
-        border: 3px solid #34201e;
-        border-radius: 4px;
+        background: linear-gradient(rgba(58, 21, 29, 0.3), rgba(76, 28, 27, 0.4)), linear-gradient(#ffc0c6 30%, rgba(144, 52, 77, 0.1) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, #c74b35, #c13967, #d1497c, #c13967, #c74b35);
+        border: 5px solid transparent;
+        background-origin: border-box;
+        background-clip: padding-box, border-box, border-box;
+        background-size: 200%;
+        border-radius: 100px;
         cursor: pointer;
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        animation: animate 2s infinite linear;
     }
 
-        #update-buttons button:hover {
-            border-color: transparent;
-            box-shadow: -1px -1px 0 2px #855e4c, 1px 1px 0 2px #82455B;
+        #update-buttons button::before {
+            content: '';
+            background: linear-gradient(90deg, #c74b35, #c13941, #c13967, #d1497c, #c13967, #c13941, #c74b35);
+            opacity: 25%;
+            height: 80%;
+            width: 105%;
+            position: absolute;
+            left: -2%;
+            bottom: -5%;
+            z-index: -1;
+            background-size: 200%;
+            animation: animate 2s infinite linear;
+            transition: opacity 0.8s ease;
+            filter: blur(30px);
         }
+
+        #update-buttons button:hover {
+            animation: animate 0.5s infinite linear;
+        }
+
+            #update-buttons button:hover::before {
+                animation: animate 0.5s infinite linear;
+                opacity: 90%;
+            }
 
         #update-buttons button:focus {
             outline: none;
@@ -199,7 +318,47 @@
     font-size: 1.1vw;
 }
 
-#update-attributes input:focus, #update-attributes ul:focus, #update-code textarea:focus {
+#update-attributes input:focus, #update-attributes ul:focus {
     outline: none;
-    box-shadow: 0 0 8px 4px #613C3F;
+    box-shadow: 0 0 8px 4px rgba(199, 75, 53, 0.4);
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+@keyframes rotateMenu {
+    0% {
+        transform: translateX(-50%) rotateX(-90deg)
+    }
+
+    70% {
+        transform: translateX(-50%) rotateX(20deg)
+    }
+
+    100% {
+        transform: translateX(-50%) rotateX(0deg)
+    }
+}
+
+@keyframes glowExpandCreate {
+    from {
+        height: 80%;
+        bottom: -3%;
+        opacity: 20%;
+        filter: blur(30px);
+    }
+
+    to {
+        height: 600%;
+        bottom: -550%;
+        opacity: 70%;
+        filter: blur(50px);
+    }
 }

@@ -8,7 +8,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("");
     const [code, setCode] = useState("");
-    const [tags, setTags] = useState("");
+    const [tags, setTags] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -40,7 +40,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
         if (!title.trim()) return "Title is required.";
         if (!code) return "Code is required.";
         if (!language.trim()) return "Language is required.";
-        if (!tags.trim()) return "At least one tag is required.";
+        if (!Array.isArray(tags) || tags.length === 0) return "At least one tag is required.";
         else return null;
     }
 
@@ -59,7 +59,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
             code: code,
             language: language.trim(),
             description: description.trim(),
-            tags: tags.split(",").map(t => t.trim()).filter(Boolean)
+            tags: tags.map(t => t.name)
         }
 
         setLoading(true);
@@ -151,7 +151,7 @@ export default function SnippetCreate({ onCreate, onCancel }) {
                 <div className="code" id="create-code">
                     <label>
                         Code:
-                        <div className="textarea-wrapper">
+                        <div className="textarea-wrapper" id="textarea-wrapper-create">
                             <textarea
                                 id="code-area-create"
                                 value={code}

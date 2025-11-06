@@ -170,14 +170,14 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
     list-style: none;
     border: solid 3px;
     border-top: transparent 3px;
     border-color: rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+    backdrop-filter: blur(3px);
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
@@ -191,6 +191,7 @@
         cursor: pointer;
         position: relative;
         text-align: center;
+        text-shadow: 1px 1px black;
         transition: background-color 0.1s ease;
     }
 
@@ -236,16 +237,17 @@
         flex-wrap: nowrap;
     }
 
-#serverpicker-dropdown-menu #serverpicker-buttons button {
-    width: 50%;
-    font-size: 0.95rem;
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 0px;
-    border-radius: 0px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        #serverpicker-dropdown-menu #serverpicker-buttons button {
+            width: 50%;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-shadow: 1px 1px black;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 0px;
+            border-radius: 0px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
     #serverpicker-dropdown-menu #serverpicker-buttons button:hover {
         border: 0px;

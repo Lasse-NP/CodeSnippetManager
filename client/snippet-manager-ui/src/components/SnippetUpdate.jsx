@@ -8,7 +8,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("");
     const [code, setCode] = useState("");
-    const [tags, setTags] = useState("");
+    const [tags, setTags] = useState([]);
     const [loading, setLoading] = useState(false);
     const [fetchingSnippet, setFetchingSnippet] = useState(true);
     const [error, setError] = useState(null);
@@ -76,7 +76,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
         if (!title.trim()) return "Title is required.";
         if (!code) return "Code is required.";
         if (!language.trim()) return "Language is required.";
-        if (!tags.trim()) return "At least one tag is required.";
+        if (!Array.isArray(tags) || tags.length === 0) return "At least one tag is required.";
         else return null;
     }
 
@@ -95,7 +95,7 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
             code: code,
             language: language.trim(),
             description: description.trim(),
-            tags: tags.split(",").map(t => t.trim()).filter(Boolean)
+            tags: tags.map(t => t.name)
         }
 
         setLoading(true);
@@ -190,11 +190,14 @@ export default function SnippetUpdate({ selectedSnippetId, onUpdate, onCancel })
                 <div className="code" id="update-code">
                     <label>
                         Code:
-                        <textarea
-                            value={code}
-                            onChange={e => setCode(e.target.value)}
-                            rows={10}
-                        />
+                        <div className="textarea-wrapper" id="textarea-wrapper-update">
+                            <textarea
+                                id="code-area-update"
+                                value={code}
+                                onChange={e => setCode(e.target.value)}
+                                rows={10}
+                            />
+                        </div>
                     </label>
                 </div>
                 <div className="button-group" id="update-buttons">

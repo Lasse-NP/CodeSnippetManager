@@ -12,16 +12,14 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
     const suggestionsRef = useRef(null);
 
     const tags = useMemo(() => {
-        return typeof value === 'string'
-            ? value.split(',').map(tag => tag.trim()).filter(Boolean)
-            : [];
+        return Array.isArray(value) ? value : [];
     }, [value]);
 
     useEffect(() => {
         const fetchTags = async () => {
             try {
                 const fetchedTags = await TagsAPI.getAllTags();
-                setAllTags(fetchedTags.map(tag => tag.name));
+                setAllTags(fetchedTags);
             } catch (error) {
                 console.error("Failed to fetch tags:", error);
                 setAllTags([]);
@@ -33,8 +31,8 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
     useEffect(() => {
         if (inputValue.trim()) {
             const filtered = allTags.filter(tag =>
-                tag.toLowerCase().includes(inputValue.toLowerCase()) &&
-                !tags.includes(tag)
+                tag.name.toLowerCase().includes(inputValue.toLowerCase()) &&
+                !tags.some(t => t.name === tag.name)
             );
             setSuggestions(filtered);
             setShowSuggestions(filtered.length > 0);
@@ -46,14 +44,28 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
     }, [inputValue, allTags, tags]);
 
     const addTag = (tag) => {
-        const trimmedTag = tag.trim();
-        if (trimmedTag && !tags.includes(trimmedTag)) {
-            const newTags = [...tags, trimmedTag];
-            const tagsString = newTags.join(', ');
-            if (onChange) {
-                onChange(tagsString);
-            }
+        let tagToAdd;
+
+        if (typeof tag === 'string') {
+            const trimmedTag = tag.trim();
+            if (!trimmedTag) return;
+
+            // Check if it exists in allTags
+            const existingTag = allTags.find(t => t.name.toLowerCase() === trimmedTag.toLowerCase());
+            tagToAdd = existingTag || { name: trimmedTag, snippetCount: 0 };
+        } else {
+            tagToAdd = tag;
         }
+
+        // Check if already added
+        if (tags.some(t => t.name === tagToAdd.name)) return;
+
+        const newTags = [...tags, tagToAdd];
+        if (onChange) {
+            onChange(newTags); // Pass array of objects
+        }
+
+
         setInputValue('');
         setShowSuggestions(false);
         inputRef.current?.focus();
@@ -61,9 +73,8 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
 
     const removeTag = (indexToRemove) => {
         const newTags = tags.filter((_, index) => index !== indexToRemove);
-        const tagsString = newTags.join(', ');
         if (onChange) {
-            onChange(tagsString);
+            onChange(newTags);
         }
     };
 
@@ -92,12 +103,12 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
 
         else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            setSelectedSuggestionIndex(prev => prev < suggestions.length - 1 ? prev + 1 : prev);
+            setSelectedSuggestionIndex(prev => (prev > 0 ? prev - 1 : 0));
         }
 
         else if (e.key === 'ArrowDown') {
             e.preventDefault();
-            setSelectedSuggestionIndex(prev => (prev > 0 ? prev - 1 : -1));
+            setSelectedSuggestionIndex(prev => prev < suggestions.length - 1 ? prev + 1 : prev);
         }
 
         else if (e.key === 'Escape') {
@@ -105,6 +116,19 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
             setSelectedSuggestionIndex(-1);
         }
     };
+
+    useEffect(() => {
+        if (selectedSuggestionIndex >= 0 && suggestionsRef.current) {
+            const selectedElement = suggestionsRef.current.children[selectedSuggestionIndex];
+            if (selectedElement) {
+                selectedElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'nearest'
+                });
+            }
+        }
+    }, [selectedSuggestionIndex]);
 
     const handleSuggestionClick = (tag) => {
         addTag(tag);
@@ -125,8 +149,8 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
         <div id="tags-input-container">
             <div id="tag-input-wrapper">
                 {tags.map((tag, index) => (
-                    <span key={index} id={`tag-chip-${index}`}>
-                        {tag}
+                    <span key={tag.id || index} id={`tag-chip-${tag.id || index}`}>
+                        {tag.name}
                         <button type="button" className="tag-remove-btn" id={`tag-remove-btn-${index}`} onClick={() => removeTag(index)}>X</button>
                     </span>
                 ))}
@@ -144,12 +168,11 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
                 <ul id="tag-suggestions" ref={suggestionsRef}>
                     {suggestions.map((suggestion, index) => (
                         <li
-                            key={suggestion}
+                            key={suggestion.id || index}
                             className={`suggestion-item ${index === selectedSuggestionIndex ? 'selected' : ''}`}
                             onClick={() => handleSuggestionClick(suggestion)}
-                            onMouseEnter={() => setSelectedSuggestionIndex(index)}
                         >
-                            {suggestion}
+                            {suggestion.name} ({suggestion.snippetCount})
                         </li>
                     ))}
                 </ul>

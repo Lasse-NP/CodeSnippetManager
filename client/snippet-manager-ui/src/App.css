@@ -33,7 +33,7 @@ body {
         filter: blur(150px);
     }
 
-#bottom-right-gear-view, #bottom-right-gear-create {
+#bottom-right-gear-view, #bottom-right-gear-create, #bottom-right-gear-update {
     position: absolute;
     width: 1000px;
     height: 1000px;

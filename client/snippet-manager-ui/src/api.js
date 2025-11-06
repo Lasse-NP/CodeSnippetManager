@@ -54,7 +54,7 @@ export const snippetsAPI = {
     createSnippet: async (snippetData) => {
         const response = await fetch(`${getBaseURL()}/snippets`, {
             method: 'POST',
-            headers: getHeaders(false),
+            headers: getHeaders(true),
             body: JSON.stringify(snippetData),
         });
         if (!response.ok) {
@@ -67,7 +67,7 @@ export const snippetsAPI = {
     updateSnippet: async (id, snippetData) => {
         const response = await fetch(`${getBaseURL()}/snippets/${id}`, {
             method: 'PUT',
-            headers: getHeaders(false),
+            headers: getHeaders(true),
             body: JSON.stringify(snippetData),
         });
         if (!response.ok) {
@@ -138,7 +138,7 @@ export const TagsAPI = {
     createTag: async (tagData) => {
         const response = await fetch(`${getBaseURL()}/tags`, {
             method: 'POST',
-            headers: getHeaders(false),
+            headers: getHeaders(true),
             body: JSON.stringify(tagData),
         });
         if (!response.ok) {
@@ -151,7 +151,7 @@ export const TagsAPI = {
     updateTag: async (id, tagData) => {
         const response = await fetch(`${getBaseURL()}/tags/${id}`, {
             method: 'PUT',
-            headers: getHeaders(false),
+            headers: getHeaders(true),
             body: JSON.stringify(tagData),
         });
         if (!response.ok) {
