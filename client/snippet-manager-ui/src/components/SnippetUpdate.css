@@ -37,7 +37,7 @@
     font-size: 2.5vw;
     font-weight: bold;
     flex: 1;
-    background: linear-gradient(135deg, #3d2328, #472C2D, #5a3840);
+    background: linear-gradient(135deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.15));
 }
 
 

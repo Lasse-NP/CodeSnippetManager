@@ -131,7 +131,7 @@
     background: linear-gradient(135deg, rgba(199, 75, 53, 0.1), rgba(209, 73, 124, 0.1));
     border: 3px solid rgba(199, 75, 53, 0.2);
     backdrop-filter: blur(10px);
-    opacity: 90%;
+    opacity: 100%;
     color: white;
     padding: 25px;
     margin-left: 10px;
@@ -145,18 +145,19 @@
     }
 
     #view-code::-webkit-scrollbar-track {
-        background: #392320;
-        border-radius: 20px;
+        background: rgba(61, 38, 34, 0.5);
+        border-radius: 5px;
         margin: 14px 0;
     }
 
     #view-code::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, #7e5b4b, #7c474d);
+        background: linear-gradient(to bottom, rgba(199, 75, 53, 0.2), rgba(209, 73, 124, 0.2));
+        border: 2px solid rgba(199, 75, 53, 0.8);
         border-radius: 5px;
     }
 
         #view-code::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #8a6450, #8a4c52);
+            background: linear-gradient(to bottom, rgba(199, 75, 53, 0.7), rgba(209, 73, 124, 0.7));
         }
 
     #view-code pre {

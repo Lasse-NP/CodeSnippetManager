@@ -46,6 +46,7 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
     const addTag = (tag) => {
         let tagToAdd;
 
+        // If tag is a string, create a new tag object
         if (typeof tag === 'string') {
             const trimmedTag = tag.trim();
             if (!trimmedTag) return;
@@ -62,7 +63,7 @@ function TagInput({ value = "", onChange, placeholder = "Type to add tags..." })
 
         const newTags = [...tags, tagToAdd];
         if (onChange) {
-            onChange(newTags); // Pass array of objects
+            onChange(newTags);
         }
 
 
