@@ -1,76 +1,48 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetDetail.css';
 
-function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
+function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete, prismLoaded }) {
     const previousSnippetId = useRef(null);
     const [snippet, setSnippet] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [prismLoaded, setPrismLoaded] = useState(false);
     const [animationState, setAnimationState] = useState('idle');
     const codeRef = useRef(null);
-
-    useEffect(() => {
-        if (window.Prism) {
-            setPrismLoaded(true);
-            return;
-        }
-
-        // Load Prism CSS
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
-        document.head.appendChild(link);
-
-        // Load Prism JS
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
-        document.head.appendChild(script);
-
-        script.onload = () => {
-            // Load common language support after main Prism loads
-            const languages = ['javascript', 'python', 'java', 'csharp', 'css', 'markup', 'sql', 'json', 'jsx', 'cshtml'];
-            let loadedCount = 0;
-
-            languages.forEach(lang => {
-                const langScript = document.createElement('script');
-                langScript.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-${lang}.min.js`;
-                langScript.onload = () => {
-                    loadedCount++;
-                    if (loadedCount === languages.length) {
-                        setPrismLoaded(true);
-                    }
-                };
-                document.head.appendChild(langScript);
-            });
-        };
-
-        document.head.appendChild(script);
-    }, []);
+    const animationTimeoutRef = useRef(null);
 
     useEffect(() => {
         if (selectedSnippetId) {
             const fetchSnippetDetails = async () => {
                 try {
                     setError(null);
+                    const shouldAnimate = previousSnippetId.current && previousSnippetId.current !== selectedSnippetId;
                     // If there's a previous snippet and it's different, trigger exit animation
-                    if (previousSnippetId.current && previousSnippetId.current !== selectedSnippetId) {
+                    if (shouldAnimate) {
                         setAnimationState('exit');
-                        const fetchPromise = snippetsAPI.getSnippetById(selectedSnippetId);
-                        await new Promise(resolve => setTimeout(resolve, 500)); // Match CSS animation duration
-                        const data = await fetchPromise
+                        const [data] = await Promise.all([
+                            snippetsAPI.getSnippetById(selectedSnippetId),
+                            new Promise(resolve => setTimeout(resolve, 500)) // Match CSS animation duration
+                        ])
                         setSnippet(data);
+                        setAnimationState('enter');
                     } else {
                         // First load - no animation needed
                         setLoading(true);
                         const data = await snippetsAPI.getSnippetById(selectedSnippetId);
                         setSnippet(data);
                         setLoading(false);
+                        setAnimationState('enter');
                     }
                     previousSnippetId.current = selectedSnippetId;
-                    setAnimationState('enter');
-                    setTimeout(() => setAnimationState('idle'), 500);
+
+                    if (animationTimeoutRef.current) {
+                        clearTimeout(animationTimeoutRef.current);
+                    }
+
+                    animationTimeoutRef.current = setTimeout(() => {
+                        setAnimationState('idle');
+                    }, 500);
                 } catch (err) {
                     setError('Failed to load snippet details.');
                     console.error('Error fetching snippet details:', err);
@@ -88,9 +60,36 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     // Highlight code when snippet changes
     useEffect(() => {
         if (prismLoaded && window.Prism && codeRef.current && snippet) {
-            window.Prism.highlightElement(codeRef.current);
+            requestAnimationFrame(() => {
+                window.Prism.highlightElement(codeRef.current);
+            });
         }
     }, [snippet, prismLoaded]);
+
+    const handleUpdate = useCallback(() => {
+        onStartUpdate?.();
+    }, [onStartUpdate]);
+
+    const handleDelete = useCallback(async () => {
+        if (window.confirm('Are you sure you want to delete this snippet?')) {
+            try {
+                await snippetsAPI.deleteSnippet(selectedSnippetId);
+                onStartDelete?.();
+            } catch (err) {
+                alert('Failed to delete snippet.');
+                console.error('Error deleting snippet:', err);
+            }
+        }
+    }, [selectedSnippetId, onStartDelete]);
+
+    const copyToClipboard = useCallback(async () => {
+        try {
+            await navigator.clipboard.writeText(snippet.code);
+            console.log('Copied to clipboard!');
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    }, [snippet?.code]);
 
     if (loading) {
         // Insert text to display during loading
@@ -124,35 +123,6 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
             </div>
         );
     }
-
-    const handleUpdate = () => {
-        if (onStartUpdate) {
-            onStartUpdate();
-        }
-    };
-
-    const handleDelete = async () => {
-        if (window.confirm('Are you sure you want to delete this snippet?')) {
-            try {
-                await snippetsAPI.deleteSnippet(selectedSnippetId);
-                if (onStartDelete) {
-                    onStartDelete();
-                }
-            } catch (err) {
-                alert('Failed to delete snippet.');
-                console.error('Error deleting snippet:', err);
-            }
-        }
-    };
-
-    const copyToClipboard = async () => {
-        try {
-            await navigator.clipboard.writeText(snippet.code);
-            console.log('Copied to clipboard!');
-        } catch (err) {
-            console.error('Failed to copy:', err);
-        }
-    };
 
     return (
         <div className="container" id="snippet-view-background">
@@ -195,4 +165,4 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete }) {
     );
 }
 
-export default SnippetDetail;
+export default memo(SnippetDetail);

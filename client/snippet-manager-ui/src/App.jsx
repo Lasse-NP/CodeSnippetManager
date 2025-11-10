@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'
 import NavigationBar from './components/NavigationBar';
 import SearchBar from './components/SearchBar';
@@ -22,6 +22,65 @@ function App() {
     const [refreshTrigger, setRefreshTrigger] = useState(0);
     // State for server selection
     const [server, setServerState] = useState("Remote");
+    // State for Prism loading
+    const [prismLoaded, setPrismLoaded] = useState(false);
+
+    useEffect(() => {
+        const loadPrism = (() => {
+            let loaded = false;
+            let loading = false;
+            const callbacks = [];
+
+            return (callback) => {
+                if (loaded) {
+                    callback();
+                    return;
+                }
+
+                callbacks.push(callback);
+
+                if (loading) return;
+                loading = true;
+
+                if (window.Prism) {
+                    loaded = true;
+                    callbacks.forEach(cb => cb());
+                    callbacks.length = 0;
+                    return;
+                }
+
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+                document.head.appendChild(link);
+
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+
+                script.onload = () => {
+                    const languages = ['javascript', 'python', 'java', 'csharp', 'css', 'markup', 'sql', 'json', 'jsx', 'cshtml'];
+                    let loadedCount = 0;
+
+                    languages.forEach(lang => {
+                        const langScript = document.createElement('script');
+                        langScript.src = `https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-${lang}.min.js`;
+                        langScript.onload = () => {
+                            loadedCount++;
+                            if (loadedCount === languages.length) {
+                                loaded = true;
+                                callbacks.forEach(cb => cb());
+                                callbacks.length = 0;
+                            }
+                        };
+                        document.head.appendChild(langScript);
+                    });
+                };
+
+                document.head.appendChild(script);
+            };
+        })();
+        loadPrism(() => setPrismLoaded(true));
+    }, []);
 
     const handleCreateSnippet = (newSnippet) => {
         setCurrentView('view');
@@ -130,6 +189,7 @@ function App() {
                             selectedSnippetId={selectedSnippetId}
                             onStartUpdate={handleStartUpdate}
                             onStartDelete={handleStartDelete}
+                            prismLoaded={prismLoaded}
                         />
                     </div>
                 ) : currentView === 'create' ? (

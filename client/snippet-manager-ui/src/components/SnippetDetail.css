@@ -26,15 +26,18 @@
 
     #snippet-view.exit {
         animation: slideOutLeft 0.5s ease-in-out forwards;
+        will-change: transform;
     }
 
     #snippet-view.enter {
         animation: slideInLeft 0.5s ease-in-out forwards;
+        will-change: transform;
     }
 
     #snippet-view.idle {
         transform: translateX(0);
         opacity: 1;
+        will-change: auto;
     }
 
 #no-snippet-view, #view-loading, #view-pending {
@@ -138,6 +141,7 @@
     margin-right: 10px;
     overflow-y: auto;
     border-radius: 20px;
+    transform: translateZ(0); /* Enable GPU acceleration */
 }
 
     #view-code::-webkit-scrollbar {
@@ -181,6 +185,7 @@
         opacity: 20%;
         transition: opacity 0.5s ease;
         cursor: pointer;
+        will-change: opacity;
     }
 
         #view-code #copy-button:hover {
@@ -207,7 +212,7 @@
         background-size: 200%;
         border-radius: 100px;
         cursor: pointer;
-        animation: animate 2s infinite linear;
+        transition: background-position 0.3s ease;
     }
 
         #view-buttons button::before {
@@ -221,23 +226,34 @@
             bottom: -5%;
             z-index: -1;
             background-size: 200%;
-            animation: animate 2s infinite linear;
             transition: opacity 0.8s ease;
             filter: blur(30px);
         }
 
         #view-buttons button:hover {
             animation: animate 0.5s infinite linear;
+            will-change: background-position;
         }
 
             #view-buttons button:hover::before {
                 animation: animate 0.5s infinite linear;
                 opacity: 90%;
+                will-change: background-position;
             }
 
         #view-buttons button:focus {
             outline: none;
         }
+
+        #view-buttons button:not(:hover) {
+            animation: none;
+            will-change: auto;
+        }
+
+            #view-buttons button:not(:hover)::before {
+                animation: none;
+                will-change: auto;
+            }
 
 @keyframes slideOutLeft {
     from {
