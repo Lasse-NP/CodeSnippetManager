@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { snippetsAPI } from '../api';
 import './SnippetDetail.css';
 
@@ -165,4 +165,4 @@ function SnippetDetail({ selectedSnippetId, onStartUpdate, onStartDelete, prismL
     );
 }
 
-export default memo(SnippetDetail);
+export default SnippetDetail;
