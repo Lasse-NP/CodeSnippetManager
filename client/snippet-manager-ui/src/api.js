@@ -4,7 +4,7 @@ let apiKey = 'KzqLnTt23pcILLViOfpMfju5TU+mxQwncJnFc1g7F/c=';
 const getBaseURL = () => {
     return currentServer === 'Local'
         ? 'https://localhost:7001/api'  // or your SQLExpress URL
-        : 'https://api.snippetmanager.work/api';
+        : '';
 };
 
 const getHeaders = (includeContentType = true) => {
