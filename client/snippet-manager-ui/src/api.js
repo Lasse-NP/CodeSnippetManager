@@ -1,4 +1,4 @@
-let currentServer = 'Remote';
+let currentServer = 'Local';
 let apiKey = 'KzqLnTt23pcILLViOfpMfju5TU+mxQwncJnFc1g7F/c=';
 
 const getBaseURL = () => {
